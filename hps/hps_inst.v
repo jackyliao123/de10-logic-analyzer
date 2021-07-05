@@ -1,0 +1,42 @@
+	hps u0 (
+		.capture_clk_clk               (<connected-to-capture_clk_clk>),               //      capture_clk.clk
+		.capture_clk_div8_clk          (<connected-to-capture_clk_div8_clk>),          // capture_clk_div8.clk
+		.clk_clk                       (<connected-to-clk_clk>),                       //              clk.clk
+		.f2h_sdram0_data_address       (<connected-to-f2h_sdram0_data_address>),       //  f2h_sdram0_data.address
+		.f2h_sdram0_data_burstcount    (<connected-to-f2h_sdram0_data_burstcount>),    //                 .burstcount
+		.f2h_sdram0_data_waitrequest   (<connected-to-f2h_sdram0_data_waitrequest>),   //                 .waitrequest
+		.f2h_sdram0_data_readdata      (<connected-to-f2h_sdram0_data_readdata>),      //                 .readdata
+		.f2h_sdram0_data_readdatavalid (<connected-to-f2h_sdram0_data_readdatavalid>), //                 .readdatavalid
+		.f2h_sdram0_data_read          (<connected-to-f2h_sdram0_data_read>),          //                 .read
+		.f2h_sdram0_data_writedata     (<connected-to-f2h_sdram0_data_writedata>),     //                 .writedata
+		.f2h_sdram0_data_byteenable    (<connected-to-f2h_sdram0_data_byteenable>),    //                 .byteenable
+		.f2h_sdram0_data_write         (<connected-to-f2h_sdram0_data_write>),         //                 .write
+		.h2f_lw_waitrequest            (<connected-to-h2f_lw_waitrequest>),            //           h2f_lw.waitrequest
+		.h2f_lw_readdata               (<connected-to-h2f_lw_readdata>),               //                 .readdata
+		.h2f_lw_readdatavalid          (<connected-to-h2f_lw_readdatavalid>),          //                 .readdatavalid
+		.h2f_lw_burstcount             (<connected-to-h2f_lw_burstcount>),             //                 .burstcount
+		.h2f_lw_writedata              (<connected-to-h2f_lw_writedata>),              //                 .writedata
+		.h2f_lw_address                (<connected-to-h2f_lw_address>),                //                 .address
+		.h2f_lw_write                  (<connected-to-h2f_lw_write>),                  //                 .write
+		.h2f_lw_read                   (<connected-to-h2f_lw_read>),                   //                 .read
+		.h2f_lw_byteenable             (<connected-to-h2f_lw_byteenable>),             //                 .byteenable
+		.h2f_lw_debugaccess            (<connected-to-h2f_lw_debugaccess>),            //                 .debugaccess
+		.mem_clk_clk                   (<connected-to-mem_clk_clk>),                   //          mem_clk.clk
+		.memory_mem_a                  (<connected-to-memory_mem_a>),                  //           memory.mem_a
+		.memory_mem_ba                 (<connected-to-memory_mem_ba>),                 //                 .mem_ba
+		.memory_mem_ck                 (<connected-to-memory_mem_ck>),                 //                 .mem_ck
+		.memory_mem_ck_n               (<connected-to-memory_mem_ck_n>),               //                 .mem_ck_n
+		.memory_mem_cke                (<connected-to-memory_mem_cke>),                //                 .mem_cke
+		.memory_mem_cs_n               (<connected-to-memory_mem_cs_n>),               //                 .mem_cs_n
+		.memory_mem_ras_n              (<connected-to-memory_mem_ras_n>),              //                 .mem_ras_n
+		.memory_mem_cas_n              (<connected-to-memory_mem_cas_n>),              //                 .mem_cas_n
+		.memory_mem_we_n               (<connected-to-memory_mem_we_n>),               //                 .mem_we_n
+		.memory_mem_reset_n            (<connected-to-memory_mem_reset_n>),            //                 .mem_reset_n
+		.memory_mem_dq                 (<connected-to-memory_mem_dq>),                 //                 .mem_dq
+		.memory_mem_dqs                (<connected-to-memory_mem_dqs>),                //                 .mem_dqs
+		.memory_mem_dqs_n              (<connected-to-memory_mem_dqs_n>),              //                 .mem_dqs_n
+		.memory_mem_odt                (<connected-to-memory_mem_odt>),                //                 .mem_odt
+		.memory_mem_dm                 (<connected-to-memory_mem_dm>),                 //                 .mem_dm
+		.memory_oct_rzqin              (<connected-to-memory_oct_rzqin>)               //                 .oct_rzqin
+	);
+

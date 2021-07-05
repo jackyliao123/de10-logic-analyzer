@@ -1,0 +1,110 @@
+# Loading project Logic Analyzer
+# Compile of frontend.vhdl failed with 1 errors.
+# Compile of frontend.vhdl failed with 13 errors.
+# Compile of frontend.vhdl failed with 9 errors.
+# Error opening /home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv
+# Path name '/home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv' doesn't exist.
+# Compile of frontend.vhdl failed with 7 errors.
+# Compile of frontend.vhdl failed with 6 errors.
+# Compile of frontend.vhdl failed with 3 errors.
+# Compile of frontend.vhdl was successful.
+# Compile of frontend.vhdl was successful.
+# Load canceled
+vsim work.frontend
+# vsim work.frontend 
+# Start time: 20:37:36 on Jul 03,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.frontend(main)
+add wave -position end  sim:/frontend/clk
+add wave -position end  sim:/frontend/reset
+add wave -position end  sim:/frontend/input
+add wave -position end  sim:/frontend/o_valid
+add wave -position end  sim:/frontend/output
+force -freeze sim:/frontend/clk 1 0, 0 {50 ps} -r 100
+force -freeze sim:/frontend/reset 1 0
+force -freeze sim:/frontend/input 1 0
+run
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/frontend/reset 0 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/frontend/input 0 0
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/frontend/input 1 0
+run
+force -freeze sim:/frontend/input 0 0
+run
+run
+force -freeze sim:/frontend/input 1 0
+run
+run
+run
+run
+run
+# Compile of frontend.vhdl failed with 5 errors.
+# Compile of frontend.vhdl failed with 3 errors.
+# Compile of frontend.vhdl failed with 3 errors.
+# Compile of frontend.vhdl was successful.

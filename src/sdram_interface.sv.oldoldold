@@ -1,0 +1,85 @@
+module sdram_interface(
+	input          rst_n,
+	input          wr_clk,
+	input          wr_data_en,
+	input  [255:0] wr_data,
+	output         wr_full,
+
+	input   [26:0] fill_addr_start,
+
+	input              sdram_clk,
+	output reg  [26:0] sdram_addr,
+	output reg   [7:0] sdram_burstcount,
+	input              sdram_waitrequest,
+	input      [255:0] sdram_readdata,
+	input              sdram_readdatavalid,
+	output             sdram_read,
+	output     [255:0] sdram_writedata,
+	output      [31:0] sdram_byteenable,
+	output reg         sdram_write
+);
+
+assign sdram_byteenable = 32'hffffffff;
+
+reg          rd_ack;
+reg    [7:0] rd_avail;
+wire [255:0] rd_data;
+wire         rd_empty;
+
+sdram_fifo fifo(
+	.data(wr_data),
+	.wrclk(wr_clk),
+	.wrreq(wr_data_en),
+	.wrfull(wr_full),
+
+	.rdclk(sdram_clk),
+	.rdreq(rd_ack),
+	.q(sdram_writedata),
+	.rdempty(rd_empty),
+	.rdusedw(rd_avail)
+);
+
+localparam
+		INIT = 2'b00,
+		WAIT = 2'b10,
+		XFER = 2'b11;
+
+reg [1:0] state;
+
+reg [7:0] burst_ctr;
+
+always @(posedge sdram_clk, negedge rst_n) begin
+	if(!rst_n) begin
+		state = INIT;
+		sdram_burstcount <= 0;
+		sdram_addr <= 0;
+		sdram_write <= 0;
+		burst_ctr <= 0;
+	end else begin
+		rd_ack = 0;
+		if(state == INIT) begin
+			sdram_addr <= fill_addr_start;
+			state <= WAIT;
+		end else if(state == WAIT) begin
+			if(rd_avail > 0) begin
+				sdram_burstcount <= 1;//rd_avail;
+				burst_ctr <= 1;
+				sdram_write <= 1;
+				state = XFER;
+			end
+		end else if(state == XFER) begin
+			if(!sdram_waitrequest) begin
+				rd_ack = 1;
+				if(burst_ctr == sdram_burstcount) begin
+					rd_ack = 0;
+					sdram_write <= 0;
+					sdram_addr <= sdram_addr + sdram_burstcount;
+					state = WAIT;
+				end
+				burst_ctr <= burst_ctr + 1;
+			end
+		end
+	end
+end
+
+endmodule

@@ -1,0 +1,6 @@
+DATE = "22:18:14 June 27, 2021"
+QUARTUS_VERSION = "16.0.2"
+
+# Revisions
+
+PROJECT_REVISION = "logic_analyzer"
