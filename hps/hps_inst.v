@@ -2,6 +2,7 @@
 		.capture_clk_clk               (<connected-to-capture_clk_clk>),               //      capture_clk.clk
 		.capture_clk_div8_clk          (<connected-to-capture_clk_div8_clk>),          // capture_clk_div8.clk
 		.clk_clk                       (<connected-to-clk_clk>),                       //              clk.clk
+		.f2h_sdram0_clk_clk            (<connected-to-f2h_sdram0_clk_clk>),            //   f2h_sdram0_clk.clk
 		.f2h_sdram0_data_address       (<connected-to-f2h_sdram0_data_address>),       //  f2h_sdram0_data.address
 		.f2h_sdram0_data_burstcount    (<connected-to-f2h_sdram0_data_burstcount>),    //                 .burstcount
 		.f2h_sdram0_data_waitrequest   (<connected-to-f2h_sdram0_data_waitrequest>),   //                 .waitrequest
@@ -21,7 +22,6 @@
 		.h2f_lw_read                   (<connected-to-h2f_lw_read>),                   //                 .read
 		.h2f_lw_byteenable             (<connected-to-h2f_lw_byteenable>),             //                 .byteenable
 		.h2f_lw_debugaccess            (<connected-to-h2f_lw_debugaccess>),            //                 .debugaccess
-		.mem_clk_clk                   (<connected-to-mem_clk_clk>),                   //          mem_clk.clk
 		.memory_mem_a                  (<connected-to-memory_mem_a>),                  //           memory.mem_a
 		.memory_mem_ba                 (<connected-to-memory_mem_ba>),                 //                 .mem_ba
 		.memory_mem_ck                 (<connected-to-memory_mem_ck>),                 //                 .mem_ck

@@ -70,66 +70,24 @@ module logic_analyzer(
 
 assign rst = ~KEY[0];
 
-wire clk;
-wire clk_div8;
+wire sample_clk;
+wire data_clk;
 
 wire [7:0] [31:0] wr_states;
 
 wire         mapped_wr_valid;
 wire [255:0] mapped_wr_data;
 
+wire         cprs_wr_valid;
+wire [255:0] cprs_wr_data;
+
 wire         mem_wr_valid;
 wire [255:0] mem_wr_data;
 
-pll pll(
-	.refclk(FPGA_CLK1_50),
-	.rst(rst),
-	.outclk_0(clk),
-	.outclk_1(clk_div8),
-	.locked(0)
-);
+wire sdram_clk;
+wire hps_clk;
 
-capture_frontend frontend (
-	.rst(rst),
-	.clk(clk),
-	.channels(GPIO_0[31:0]),
-	.clk_div8(clk_div8),
-	.wr_states(wr_states)
-);
-
-//wire o_valid;
-//assign clk_div8 = !o_valid;
-//
-//frontend fr (
-//	.clk(clk),
-//	.reset(rst),
-//	.inin(GPIO_0[1:0]),
-//	.o_valid(o_valid),
-//	.outout({wr_states[1], wr_states[0]})
-//);
-
-capture_channel_mapper channel_mapper (
-	.rst(rst),
-	.clk(clk_div8),
-	.channels(SW[3:1]),
-	.wr_states(wr_states),
-	.out_valid(mapped_wr_valid),
-	.out_data(mapped_wr_data)
-);
-
-//capture_compressor compressor (
-//	.rst(rst),
-//	.clk(clk_div8),
-//	.in_valid(mapped_wr_valid),
-//	.in_data(mapped_wr_data),
-//	.out_valid(mem_wr_valid),
-//	.out_data(mem_wr_data)
-//);
-
-assign mem_wr_valid = mapped_wr_valid;
-assign mem_wr_data = mapped_wr_data;
-
-wire mem_clk;
+assign hps_clk = FPGA_CLK1_50;
 
 wire  [26:0] sdram_address;
 wire   [7:0] sdram_burstcount;
@@ -141,7 +99,7 @@ wire         sdram_write;
 wire [255:0] sdram_writedata;
 wire  [31:0] sdram_byteenable;
 
-wire   [4:0] h2f_lw_address;
+wire   [5:0] h2f_lw_address;
 wire         h2f_lw_burstcount;
 wire         h2f_lw_waitrequest;
 wire         h2f_lw_read;
@@ -152,9 +110,7 @@ wire  [31:0] h2f_lw_writedata;
 wire   [3:0] h2f_lw_byteenable;
 
 hps u0 (
-	.clk_clk                       (FPGA_CLK1_50),                //              clk.clk
-
-	.mem_clk_clk                   (mem_clk),                     //          mem_clk.clk
+	.clk_clk                       (hps_clk),                     //              clk.clk
 
 	.memory_mem_a                  (HPS_DDR3_ADDR),               //           memory.mem_a
 	.memory_mem_ba                 (HPS_DDR3_BA),                 //                 .mem_ba
@@ -173,6 +129,7 @@ hps u0 (
 	.memory_mem_dm                 (HPS_DDR3_DM),                 //                 .mem_dm
 	.memory_oct_rzqin              (HPS_DDR3_RZQ),                //                 .oct_rzqin
 
+	.f2h_sdram0_clk_clk            (sdram_clk),                   //   f2h_sdram0_clk.clk
 	.f2h_sdram0_data_address       (sdram_address),               //  f2h_sdram0_data.address
 	.f2h_sdram0_data_burstcount    (sdram_burstcount),            //                 .burstcount
 	.f2h_sdram0_data_waitrequest   (sdram_waitrequest),           //                 .waitrequest
@@ -193,62 +150,8 @@ hps u0 (
 	.h2f_lw_writedata              (h2f_lw_writedata),            //                 .writedata
 	.h2f_lw_byteenable             (h2f_lw_byteenable),           //                 .byteenable
 
-	.capture_clk_clk               (ARDUINO_IO[7])
-);
-
-//wire [26:0] sdram_address_full;
-//assign sdram_address = sdram_address_full & (32'h2FFFFFFF >> 5) | (32'h20000000 >> 5);
-
-wire fail;
-assign fail = sdram_address < (32'h20000000 >> 5) || sdram_address > (32'h40000000 >> 5);
-
-assign LED[6] = fail;
-
-wire write_full;
-assign LED[4] = write_full;
-
-//reg[48:0] test_ctr1;
-//reg[32:0] test_ctr2;
-//
-//assign LED[7] = test_ctr1[25];
-//
-//always @(posedge FPGA_CLK1_50) begin
-//	test_ctr1 <= test_ctr1 + 1;
-//end
-//
-//always @(posedge FPGA_CLK1_50, posedge rst) begin
-//	if(rst) begin
-//		test_ctr2 <= 0;
-//	end else begin
-//		if(!write_full) begin
-//			test_ctr2 <= test_ctr2 + 1;
-//		end
-//	end
-//end
-
-sdram_interface sdram_iface(
-	.rst(rst),
-	.wr_clk(clk_div8),
-	.wr_data_en(~write_full && mem_wr_valid),
-	.wr_data(mem_wr_data),
-	.wr_full(write_full),
-
-	.fill_launch(~KEY[1]),
-	.fill_terminate(SW[0]),
-	.fill_running(LED[5]),
-	.fill_addr_start(32'h20000000 >> 5),
-	.fill_addr_end(32'h3fffffff >> 5),
-
-	.sdram_clk           (mem_clk),
-	.sdram_address       (sdram_address),
-	.sdram_burstcount    (sdram_burstcount),
-	.sdram_waitrequest   (sdram_waitrequest),
-	.sdram_read          (sdram_read),
-	.sdram_readdata      (sdram_readdata),
-	.sdram_readdatavalid (sdram_readdatavalid),
-	.sdram_write         (sdram_write),
-	.sdram_writedata     (sdram_writedata),
-	.sdram_byteenable    (sdram_byteenable)
+	.capture_clk_clk               (sample_clk),
+	.capture_clk_div8_clk          (data_clk)
 );
 
 wire        reg_clk       [16];
@@ -259,7 +162,7 @@ wire [31:0] reg_writedata;
 memory_mapped_regs #(.ADDR_SIZE(4)) mm (
 	.rst(rst),
 
-	.mm_clk           (mem_clk),
+	.mm_clk           (hps_clk),
 	.mm_address       (h2f_lw_address),
 	.mm_burstcount    (h2f_lw_burstcount),
 	.mm_waitrequest   (h2f_lw_waitrequest),
@@ -276,32 +179,255 @@ memory_mapped_regs #(.ADDR_SIZE(4)) mm (
 	.reg_writedata  (reg_writedata)
 );
 
-assign reg_clk[0] = ARDUINO_IO[7];
-
-reg [31:0] ctr;
-
-assign reg_readdata[0] = ctr;
-
-always @(posedge ARDUINO_IO[7]) begin
+//  0: Register CTRL (RW)
+//     31  - run
+//     26  - compression
+// [26:24] - trig mode
+//             0 - always
+//             1 - never
+//             2 - rising edge
+//             3 - falling edge
+//             4 - both edges
+//             5 - high
+//             6 - low
+// [23:19] - trig channel
+// [18:16] - num channels
+//      1  - reset sdram_iface
+//      0  - reset frontend
+reg [31:0] reg_CTRL;
+assign reg_readdata[0] = reg_CTRL;
+assign reg_clk[0] = hps_clk;
+always @(posedge hps_clk) begin
 	if(reg_write[0]) begin
-		ctr <= reg_writedata;
-	end else begin
-		ctr <= ctr + 1;
+		reg_CTRL <= reg_writedata;
 	end
 end
 
-assign reg_clk[3] = ARDUINO_IO[7];
+//  1: Register STATUS (R)
+// [24:16] - overflow counter
+//     10  - finished
+//      9  - samples wrapped in memory
+//      8  - triggered
+// [ 7: 0] - trigger subsample
+reg [31:0] reg_STATUS;
+assign reg_readdata[1] = reg_STATUS;
+assign reg_clk[0] = hps_clk;
 
-reg [31:0] shr;
+//  2: Register TRIG_COND_MATCH (RW)
+// [31: 0] - match
+reg [31:0] reg_TRIG_COND_MATCH;
+assign reg_readdata[2] = reg_TRIG_COND_MATCH;
+always @(posedge data_clk) begin
+	if(reg_write[2]) begin
+		reg_TRIG_COND_MATCH <= reg_writedata;
+	end
+end
 
-assign reg_readdata[3] = shr;
-
-always @(posedge ARDUINO_IO[7]) begin
+//  3: Register TRIG_COND_MASK (RW)
+// [31: 0] - mask
+reg [31:0] reg_TRIG_COND_MASK;
+assign reg_readdata[3] = reg_TRIG_COND_MASK;
+always @(posedge data_clk) begin
 	if(reg_write[3]) begin
-		shr <= reg_writedata;
-	end else begin
-		shr <= {shr[30:0], shr[31]};
+		reg_TRIG_COND_MASK <= reg_writedata;
 	end
 end
+
+//  4: Register NUM_SAMPLES (R)
+// [63: 0] - number of samples collected
+reg [63:0] reg_NUM_SAMPLES;
+assign reg_clk[4:5] = '{data_clk, data_clk};
+assign reg_readdata[4:5] = '{reg_NUM_SAMPLES[31:0], reg_NUM_SAMPLES[63:32]};
+
+//  6: Register LIMIT_TRIG_SAMPLES (RW)
+// [63: 0] - maximum number of samples after trigger
+reg [63:0] reg_LIMIT_TRIG_SAMPLES;
+assign reg_clk[6:7] = '{data_clk, data_clk};
+assign reg_readdata[6:7] = '{reg_LIMIT_TRIG_SAMPLES[31:0], reg_LIMIT_TRIG_SAMPLES[63:32]};
+always @(posedge data_clk) begin
+	if(reg_write[7]) begin
+		reg_LIMIT_TRIG_SAMPLES[63:32] <= reg_writedata;
+	end
+	if(reg_write[6]) begin
+		reg_LIMIT_TRIG_SAMPLES[31:0] <= reg_writedata;
+	end
+end
+
+//  8: Register NUM_ENTRIES (R)
+// [31: 0] - number of entries written
+reg [31:0] reg_NUM_ENTRIES;
+assign reg_clk[8] = data_clk;
+assign reg_readdata[8] = reg_NUM_ENTRIES;
+
+// 9: Register LIMIT_TRIG_ENTRIES (RW)
+// [31: 0] - maximum number of entries after trigger
+reg [31:0] reg_LIMIT_TRIG_ENTRIES;
+assign reg_clk[9] = data_clk;
+assign reg_readdata[9] = reg_LIMIT_TRIG_ENTRIES;
+always @(posedge data_clk) begin
+	if(reg_write[9]) begin
+		reg_LIMIT_TRIG_ENTRIES <= reg_writedata;
+	end
+end
+
+// 10: Register TRIG_ENTRY (R)
+// [31: 0] - the entry where trigger happened
+reg [31:0] reg_TRIG_ENTRY;
+assign reg_clk[10] = data_clk;
+assign reg_readdata[10] = reg_TRIG_ENTRY;
+
+// 11: Register CLK_CNT_SAMPLE (R)
+// [31: 0] - clk rate in kHz
+reg [31:0] reg_CLK_CNT_SAMPLE;
+assign reg_clk[11] = FPGA_CLK1_50;
+clock_monitor clk_mon_sample(
+	.rst(rst),
+	.clk(sample_clk),
+	.ref_clk(FPGA_CLK1_50),
+	.count(reg_readdata[11])
+);
+
+// 12: Register CLK_CNT_DATA (R)
+// [31: 0] - clk rate in kHz
+reg [31:0] reg_CLK_CNT_DATA;
+assign reg_clk[12] = FPGA_CLK1_50;
+clock_monitor clk_mon_data(
+	.rst(rst),
+	.clk(data_clk),
+	.ref_clk(FPGA_CLK1_50),
+	.count(reg_readdata[12])
+);
+
+wire rst_frontend;
+reset_sync reset_frontend(
+	.rst_in(rst | reg_CTRL[0] /* reset frontend */),
+	.clk(sample_clk),
+	.rst_out(rst_frontend)
+);
+
+wire rst_data_pipeline;
+reset_sync reset_pipeline(
+	.rst_in(rst | reg_CTRL[0] /* reset frontend */),
+	.clk(data_clk),
+	.rst_out(rst_data_pipeline)
+);
+
+wire rst_compressor;
+reset_sync reset_compressor(
+	.rst_in(rst | reg_CTRL[0] /* reset frontend */ | !reg_CTRL[26] /* compression */),
+	.clk(data_clk),
+	.rst_out(rst_compressor)
+);
+
+wire rst_sdram;
+reset_sync reset_sdram(
+	.rst_in(rst | reg_CTRL[1] /* reset sdram_iface */),
+	.clk(sdram_clk),
+	.rst_out(rst_sdram)
+);
+
+reg [1:0] run_buf;
+wire run;
+assign run = run_buf[1];
+
+always @(posedge data_clk, posedge rst_data_pipeline) begin
+	if(rst_data_pipeline) begin
+		run_buf <= 0;
+	end else begin
+		run_buf <= {run_buf[0], reg_CTRL[31] /* run */};
+	end
+end
+
+
+capture_frontend frontend (
+	.rst(rst_frontend),
+	.clk(sample_clk),
+	.channels(GPIO_0[31:0]),
+	.clk_div8(data_clk),
+	.wr_states(wr_states)
+);
+
+//lvds_frontend frontend (
+//	//.rx_enable(data_clk),
+//	.rx_in(GPIO_0[31:0]),
+//	.rx_inclock(GPIO_1[0]),
+//	.rx_out(wr_states),
+//	.rx_outclock(data_clk)
+//);
+
+
+//wire o_valid;
+//assign data_clk = !o_valid;
+//
+//frontend fr (
+//	.clk(sample_clk),
+//	.reset(rst),
+//	.inin(GPIO_0[1:0]),
+//	.o_valid(o_valid),
+//	.outout({wr_states[1], wr_states[0]})
+//);
+
+capture_channel_mapper channel_mapper (
+	.rst(rst_data_pipeline),
+	.clk(data_clk),
+	.channels(reg_CTRL[18:16] /* num channels */),
+	.wr_states(wr_states),
+	.out_valid(mapped_wr_valid),
+	.out_data(mapped_wr_data)
+);
+
+capture_compressor compressor (
+	.rst(rst_compressor),
+	.clk(data_clk),
+	.in_valid(mapped_wr_valid && run),
+	.in_data(mapped_wr_data),
+	.out_valid(cprs_wr_valid),
+	.out_data(cprs_wr_data)
+);
+
+assign mem_wr_valid = (reg_CTRL[26] /* compression */ ? cprs_wr_valid : mapped_wr_valid) && run;
+assign mem_wr_data = reg_CTRL[26] /* compression */ ? cprs_wr_data : mapped_wr_data;
+
+always @(posedge data_clk, posedge rst_data_pipeline) begin
+	if(rst_data_pipeline) begin
+		reg_NUM_SAMPLES <= 0;
+		reg_NUM_ENTRIES <= 0;
+	end else begin
+		if(run) begin
+			reg_NUM_SAMPLES <= reg_NUM_SAMPLES + 1;
+			if(!write_full && mem_wr_valid) begin
+				reg_NUM_ENTRIES <= reg_NUM_ENTRIES + 1;
+			end
+		end else begin
+			reg_NUM_SAMPLES <= 0;
+			reg_NUM_ENTRIES <= 0;
+		end
+	end
+end
+
+sdram_interface sdram_iface(
+	.rst_wr(rst_data_pipeline),
+	.wr_clk(data_clk),
+	.wr_data_en(!write_full && mem_wr_valid),
+	.wr_data(mem_wr_data),
+	.wr_full(write_full),
+	.fill_launch(run),
+	.fill_terminate(!run),
+	.fill_running(LED[5]),
+	.fill_addr_start(32'h20000000 >> 5),
+	.fill_addr_end(32'h3fffffff >> 5),
+
+	.rst_sdram           (rst_sdram),
+	.sdram_clk           (sdram_clk),
+	.sdram_address       (sdram_address),
+	.sdram_burstcount    (sdram_burstcount),
+	.sdram_waitrequest   (sdram_waitrequest),
+	.sdram_read          (sdram_read),
+	.sdram_readdata      (sdram_readdata),
+	.sdram_readdatavalid (sdram_readdatavalid),
+	.sdram_write         (sdram_write),
+	.sdram_writedata     (sdram_writedata),
+	.sdram_byteenable    (sdram_byteenable)
+);
 
 endmodule

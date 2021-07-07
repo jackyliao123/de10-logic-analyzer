@@ -3,13 +3,12 @@
  <debug showDebugMenu="0" />
  <systemtable filter="All Interfaces" showResetDomains="0" showClockDomains="0">
   <columns>
-   <connections preferredWidth="239" />
+   <connections preferredWidth="47" />
    <irq preferredWidth="34" />
    <export preferredWidth="182" />
    <inputclock preferredWidth="176" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Project,Library/Interface Protocols/PCI Express,Library/Interface Protocols/PCI Express/QSYS Example Designs,Library,Library/Processors and Peripherals/Peripherals,Library/Processors and Peripherals,Library/Interface Protocols" />
- <window width="2047" height="1300" x="2886" y="289" />
+ <library expandedCategories="Library,Project" />
+ <window width="632" height="1061" x="851" y="347" />
 </preferences>

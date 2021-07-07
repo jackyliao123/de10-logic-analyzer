@@ -51,7 +51,7 @@ derive_clock_uncertainty
 #**************************************************************
 # Set Clock Groups
 #**************************************************************
-
+set_clock_groups -asynchronous -group [get_ports FPGA_CLK1_50] -group [get_ports data_clk]
 
 
 #**************************************************************

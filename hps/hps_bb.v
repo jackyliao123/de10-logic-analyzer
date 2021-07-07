@@ -3,6 +3,7 @@ module hps (
 	capture_clk_clk,
 	capture_clk_div8_clk,
 	clk_clk,
+	f2h_sdram0_clk_clk,
 	f2h_sdram0_data_address,
 	f2h_sdram0_data_burstcount,
 	f2h_sdram0_data_waitrequest,
@@ -22,7 +23,6 @@ module hps (
 	h2f_lw_read,
 	h2f_lw_byteenable,
 	h2f_lw_debugaccess,
-	mem_clk_clk,
 	memory_mem_a,
 	memory_mem_ba,
 	memory_mem_ck,
@@ -43,6 +43,7 @@ module hps (
 	output		capture_clk_clk;
 	output		capture_clk_div8_clk;
 	input		clk_clk;
+	output		f2h_sdram0_clk_clk;
 	input	[26:0]	f2h_sdram0_data_address;
 	input	[7:0]	f2h_sdram0_data_burstcount;
 	output		f2h_sdram0_data_waitrequest;
@@ -57,12 +58,11 @@ module hps (
 	input		h2f_lw_readdatavalid;
 	output	[0:0]	h2f_lw_burstcount;
 	output	[31:0]	h2f_lw_writedata;
-	output	[3:0]	h2f_lw_address;
+	output	[5:0]	h2f_lw_address;
 	output		h2f_lw_write;
 	output		h2f_lw_read;
 	output	[3:0]	h2f_lw_byteenable;
 	output		h2f_lw_debugaccess;
-	output		mem_clk_clk;
 	output	[14:0]	memory_mem_a;
 	output	[2:0]	memory_mem_ba;
 	output		memory_mem_ck;

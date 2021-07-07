@@ -7,6 +7,7 @@ module hps (
 		output wire         capture_clk_clk,               //      capture_clk.clk
 		output wire         capture_clk_div8_clk,          // capture_clk_div8.clk
 		input  wire         clk_clk,                       //              clk.clk
+		output wire         f2h_sdram0_clk_clk,            //   f2h_sdram0_clk.clk
 		input  wire [26:0]  f2h_sdram0_data_address,       //  f2h_sdram0_data.address
 		input  wire [7:0]   f2h_sdram0_data_burstcount,    //                 .burstcount
 		output wire         f2h_sdram0_data_waitrequest,   //                 .waitrequest
@@ -21,12 +22,11 @@ module hps (
 		input  wire         h2f_lw_readdatavalid,          //                 .readdatavalid
 		output wire [0:0]   h2f_lw_burstcount,             //                 .burstcount
 		output wire [31:0]  h2f_lw_writedata,              //                 .writedata
-		output wire [3:0]   h2f_lw_address,                //                 .address
+		output wire [5:0]   h2f_lw_address,                //                 .address
 		output wire         h2f_lw_write,                  //                 .write
 		output wire         h2f_lw_read,                   //                 .read
 		output wire [3:0]   h2f_lw_byteenable,             //                 .byteenable
 		output wire         h2f_lw_debugaccess,            //                 .debugaccess
-		output wire         mem_clk_clk,                   //          mem_clk.clk
 		output wire [14:0]  memory_mem_a,                  //           memory.mem_a
 		output wire [2:0]   memory_mem_ba,                 //                 .mem_ba
 		output wire         memory_mem_ck,                 //                 .mem_ck
@@ -93,7 +93,7 @@ module hps (
 	wire  [31:0] mm_interconnect_0_mm_bridge_h2f_lw_s0_readdata;                 // mm_bridge_h2f_lw:s0_readdata -> mm_interconnect_0:mm_bridge_h2f_lw_s0_readdata
 	wire         mm_interconnect_0_mm_bridge_h2f_lw_s0_waitrequest;              // mm_bridge_h2f_lw:s0_waitrequest -> mm_interconnect_0:mm_bridge_h2f_lw_s0_waitrequest
 	wire         mm_interconnect_0_mm_bridge_h2f_lw_s0_debugaccess;              // mm_interconnect_0:mm_bridge_h2f_lw_s0_debugaccess -> mm_bridge_h2f_lw:s0_debugaccess
-	wire   [3:0] mm_interconnect_0_mm_bridge_h2f_lw_s0_address;                  // mm_interconnect_0:mm_bridge_h2f_lw_s0_address -> mm_bridge_h2f_lw:s0_address
+	wire   [5:0] mm_interconnect_0_mm_bridge_h2f_lw_s0_address;                  // mm_interconnect_0:mm_bridge_h2f_lw_s0_address -> mm_bridge_h2f_lw:s0_address
 	wire         mm_interconnect_0_mm_bridge_h2f_lw_s0_read;                     // mm_interconnect_0:mm_bridge_h2f_lw_s0_read -> mm_bridge_h2f_lw:s0_read
 	wire   [3:0] mm_interconnect_0_mm_bridge_h2f_lw_s0_byteenable;               // mm_interconnect_0:mm_bridge_h2f_lw_s0_byteenable -> mm_bridge_h2f_lw:s0_byteenable
 	wire         mm_interconnect_0_mm_bridge_h2f_lw_s0_readdatavalid;            // mm_bridge_h2f_lw:s0_readdatavalid -> mm_interconnect_0:mm_bridge_h2f_lw_s0_readdatavalid
@@ -104,7 +104,7 @@ module hps (
 
 	hps_hps_0 #(
 		.F2S_Width (0),
-		.S2F_Width (1)
+		.S2F_Width (0)
 	) hps_0 (
 		.mem_a                    (memory_mem_a),                    //            memory.mem_a
 		.mem_ba                   (memory_mem_ba),                   //                  .mem_ba
@@ -123,7 +123,7 @@ module hps (
 		.mem_dm                   (memory_mem_dm),                   //                  .mem_dm
 		.oct_rzqin                (memory_oct_rzqin),                //                  .oct_rzqin
 		.h2f_rst_n                (hps_0_h2f_reset_reset),           //         h2f_reset.reset_n
-		.f2h_sdram0_clk           (mem_clk_clk),                     //  f2h_sdram0_clock.clk
+		.f2h_sdram0_clk           (f2h_sdram0_clk_clk),              //  f2h_sdram0_clock.clk
 		.f2h_sdram0_ADDRESS       (f2h_sdram0_data_address),         //   f2h_sdram0_data.address
 		.f2h_sdram0_BURSTCOUNT    (f2h_sdram0_data_burstcount),      //                  .burstcount
 		.f2h_sdram0_WAITREQUEST   (f2h_sdram0_data_waitrequest),     //                  .waitrequest
@@ -133,44 +133,7 @@ module hps (
 		.f2h_sdram0_WRITEDATA     (f2h_sdram0_data_writedata),       //                  .writedata
 		.f2h_sdram0_BYTEENABLE    (f2h_sdram0_data_byteenable),      //                  .byteenable
 		.f2h_sdram0_WRITE         (f2h_sdram0_data_write),           //                  .write
-		.h2f_axi_clk              (mem_clk_clk),                     //     h2f_axi_clock.clk
-		.h2f_AWID                 (),                                //    h2f_axi_master.awid
-		.h2f_AWADDR               (),                                //                  .awaddr
-		.h2f_AWLEN                (),                                //                  .awlen
-		.h2f_AWSIZE               (),                                //                  .awsize
-		.h2f_AWBURST              (),                                //                  .awburst
-		.h2f_AWLOCK               (),                                //                  .awlock
-		.h2f_AWCACHE              (),                                //                  .awcache
-		.h2f_AWPROT               (),                                //                  .awprot
-		.h2f_AWVALID              (),                                //                  .awvalid
-		.h2f_AWREADY              (),                                //                  .awready
-		.h2f_WID                  (),                                //                  .wid
-		.h2f_WDATA                (),                                //                  .wdata
-		.h2f_WSTRB                (),                                //                  .wstrb
-		.h2f_WLAST                (),                                //                  .wlast
-		.h2f_WVALID               (),                                //                  .wvalid
-		.h2f_WREADY               (),                                //                  .wready
-		.h2f_BID                  (),                                //                  .bid
-		.h2f_BRESP                (),                                //                  .bresp
-		.h2f_BVALID               (),                                //                  .bvalid
-		.h2f_BREADY               (),                                //                  .bready
-		.h2f_ARID                 (),                                //                  .arid
-		.h2f_ARADDR               (),                                //                  .araddr
-		.h2f_ARLEN                (),                                //                  .arlen
-		.h2f_ARSIZE               (),                                //                  .arsize
-		.h2f_ARBURST              (),                                //                  .arburst
-		.h2f_ARLOCK               (),                                //                  .arlock
-		.h2f_ARCACHE              (),                                //                  .arcache
-		.h2f_ARPROT               (),                                //                  .arprot
-		.h2f_ARVALID              (),                                //                  .arvalid
-		.h2f_ARREADY              (),                                //                  .arready
-		.h2f_RID                  (),                                //                  .rid
-		.h2f_RDATA                (),                                //                  .rdata
-		.h2f_RRESP                (),                                //                  .rresp
-		.h2f_RLAST                (),                                //                  .rlast
-		.h2f_RVALID               (),                                //                  .rvalid
-		.h2f_RREADY               (),                                //                  .rready
-		.h2f_lw_axi_clk           (mem_clk_clk),                     //  h2f_lw_axi_clock.clk
+		.h2f_lw_axi_clk           (clk_clk),                         //  h2f_lw_axi_clock.clk
 		.h2f_lw_AWID              (hps_0_h2f_lw_axi_master_awid),    // h2f_lw_axi_master.awid
 		.h2f_lw_AWADDR            (hps_0_h2f_lw_axi_master_awaddr),  //                  .awaddr
 		.h2f_lw_AWLEN             (hps_0_h2f_lw_axi_master_awlen),   //                  .awlen
@@ -212,12 +175,12 @@ module hps (
 	altera_avalon_mm_bridge #(
 		.DATA_WIDTH        (32),
 		.SYMBOL_WIDTH      (8),
-		.HDL_ADDR_WIDTH    (4),
+		.HDL_ADDR_WIDTH    (6),
 		.BURSTCOUNT_WIDTH  (1),
 		.PIPELINE_COMMAND  (0),
 		.PIPELINE_RESPONSE (0)
 	) mm_bridge_h2f_lw (
-		.clk              (mem_clk_clk),                                         //   clk.clk
+		.clk              (clk_clk),                                             //   clk.clk
 		.reset            (rst_controller_reset_out_reset),                      // reset.reset
 		.s0_waitrequest   (mm_interconnect_0_mm_bridge_h2f_lw_s0_waitrequest),   //    s0.waitrequest
 		.s0_readdata      (mm_interconnect_0_mm_bridge_h2f_lw_s0_readdata),      //      .readdata
@@ -248,15 +211,15 @@ module hps (
 		.rst               (~hps_0_h2f_reset_reset),                          //             reset.reset
 		.outclk_0          (capture_clk_clk),                                 //           outclk0.clk
 		.outclk_1          (capture_clk_div8_clk),                            //           outclk1.clk
-		.locked            (),                                                //            locked.export
 		.reconfig_to_pll   (pll_reconfig_0_reconfig_to_pll_reconfig_to_pll),  //   reconfig_to_pll.reconfig_to_pll
-		.reconfig_from_pll (pll_capture_reconfig_from_pll_reconfig_from_pll)  // reconfig_from_pll.reconfig_from_pll
+		.reconfig_from_pll (pll_capture_reconfig_from_pll_reconfig_from_pll), // reconfig_from_pll.reconfig_from_pll
+		.locked            ()                                                 //       (terminated)
 	);
 
 	hps_pll_mem pll_mem (
 		.refclk   (clk_clk),                //  refclk.clk
 		.rst      (~hps_0_h2f_reset_reset), //   reset.reset
-		.outclk_0 (mem_clk_clk),            // outclk0.clk
+		.outclk_0 (f2h_sdram0_clk_clk),     // outclk0.clk
 		.locked   ()                        //  locked.export
 	);
 
@@ -271,7 +234,7 @@ module hps (
 		.reconf_width        (64),
 		.WAIT_FOR_LOCK       (1)
 	) pll_reconfig_0 (
-		.mgmt_clk          (mem_clk_clk),                                                    //          mgmt_clk.clk
+		.mgmt_clk          (clk_clk),                                                        //          mgmt_clk.clk
 		.mgmt_reset        (rst_controller_reset_out_reset),                                 //        mgmt_reset.reset
 		.mgmt_waitrequest  (mm_interconnect_0_pll_reconfig_0_mgmt_avalon_slave_waitrequest), // mgmt_avalon_slave.waitrequest
 		.mgmt_read         (mm_interconnect_0_pll_reconfig_0_mgmt_avalon_slave_read),        //                  .read
@@ -321,7 +284,7 @@ module hps (
 		.hps_0_h2f_lw_axi_master_rlast                         (hps_0_h2f_lw_axi_master_rlast),                                  //                                                .rlast
 		.hps_0_h2f_lw_axi_master_rvalid                        (hps_0_h2f_lw_axi_master_rvalid),                                 //                                                .rvalid
 		.hps_0_h2f_lw_axi_master_rready                        (hps_0_h2f_lw_axi_master_rready),                                 //                                                .rready
-		.clock_bridge_0_out_clk_clk                            (mem_clk_clk),                                                    //                          clock_bridge_0_out_clk.clk
+		.clk_50_clk_clk                                        (clk_clk),                                                        //                                      clk_50_clk.clk
 		.pll_reconfig_0_mgmt_reset_reset_bridge_in_reset_reset (rst_controller_reset_out_reset),                                 // pll_reconfig_0_mgmt_reset_reset_bridge_in_reset.reset
 		.mm_bridge_h2f_lw_s0_address                           (mm_interconnect_0_mm_bridge_h2f_lw_s0_address),                  //                             mm_bridge_h2f_lw_s0.address
 		.mm_bridge_h2f_lw_s0_write                             (mm_interconnect_0_mm_bridge_h2f_lw_s0_write),                    //                                                .write
@@ -368,7 +331,7 @@ module hps (
 		.ADAPT_RESET_REQUEST       (0)
 	) rst_controller (
 		.reset_in0      (~hps_0_h2f_reset_reset),         // reset_in0.reset
-		.clk            (mem_clk_clk),                    //       clk.clk
+		.clk            (clk_clk),                        //       clk.clk
 		.reset_out      (rst_controller_reset_out_reset), // reset_out.reset
 		.reset_req      (),                               // (terminated)
 		.reset_req_in0  (1'b0),                           // (terminated)

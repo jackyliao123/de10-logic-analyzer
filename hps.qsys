@@ -137,6 +137,11 @@
    dir="start" />
  <interface name="clk" internal="clk_50.clk_in" type="clock" dir="end" />
  <interface
+   name="f2h_sdram0_clk"
+   internal="clock_bridge_0.out_clk_1"
+   type="clock"
+   dir="start" />
+ <interface
    name="f2h_sdram0_data"
    internal="hps_0.f2h_sdram0_data"
    type="avalon"
@@ -148,11 +153,6 @@
    dir="start" />
  <interface name="hps_0_f2h_axi_clock" internal="hps_0.f2h_axi_clock" />
  <interface name="hps_0_f2h_axi_slave" internal="hps_0.f2h_axi_slave" />
- <interface
-   name="mem_clk"
-   internal="clock_bridge_0.out_clk_1"
-   type="clock"
-   dir="start" />
  <interface name="memory" internal="hps_0.memory" type="conduit" dir="end" />
  <module name="clk_50" kind="clock_source" version="18.0" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
@@ -320,10 +320,10 @@
   <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_SPIM1_SCLK_OUT" value="100" />
   <parameter name="GPIO_Enable">No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No</parameter>
   <parameter name="GP_Enable" value="false" />
-  <parameter name="H2F_AXI_CLOCK_FREQ" value="100000000" />
+  <parameter name="H2F_AXI_CLOCK_FREQ" value="100" />
   <parameter name="H2F_CTI_CLOCK_FREQ" value="100" />
   <parameter name="H2F_DEBUG_APB_CLOCK_FREQ" value="100" />
-  <parameter name="H2F_LW_AXI_CLOCK_FREQ" value="100000000" />
+  <parameter name="H2F_LW_AXI_CLOCK_FREQ" value="50000000" />
   <parameter name="H2F_TPIU_CLOCK_IN_FREQ" value="100" />
   <parameter name="HARD_EMIF" value="true" />
   <parameter name="HCX_COMPAT_MODE" value="false" />
@@ -541,7 +541,7 @@
   <parameter name="S2FINTERRUPT_UART_Enable" value="false" />
   <parameter name="S2FINTERRUPT_USB_Enable" value="false" />
   <parameter name="S2FINTERRUPT_WATCHDOG_Enable" value="false" />
-  <parameter name="S2F_Width" value="1" />
+  <parameter name="S2F_Width" value="0" />
   <parameter name="SDIO_Mode" value="N/A" />
   <parameter name="SDIO_PinMuxing" value="Unused" />
   <parameter name="SEQUENCER_TYPE" value="NIOS" />
@@ -705,7 +705,7 @@
    version="18.0"
    enabled="1">
   <parameter name="ADDRESS_UNITS" value="WORDS" />
-  <parameter name="ADDRESS_WIDTH" value="4" />
+  <parameter name="ADDRESS_WIDTH" value="6" />
   <parameter name="DATA_WIDTH" value="32" />
   <parameter name="LINEWRAPBURSTS" value="0" />
   <parameter name="MAX_BURST_SIZE" value="1" />
@@ -805,7 +805,7 @@
   <parameter name="gui_dps_num" value="1" />
   <parameter name="gui_dsm_out_sel" value="1st_order" />
   <parameter name="gui_duty_cycle0" value="50" />
-  <parameter name="gui_duty_cycle1" value="50" />
+  <parameter name="gui_duty_cycle1" value="12" />
   <parameter name="gui_duty_cycle10" value="50" />
   <parameter name="gui_duty_cycle11" value="50" />
   <parameter name="gui_duty_cycle12" value="50" />
@@ -836,8 +836,8 @@
   <parameter name="gui_multiply_factor" value="1" />
   <parameter name="gui_number_of_clocks" value="2" />
   <parameter name="gui_operation_mode" value="direct" />
-  <parameter name="gui_output_clock_frequency0" value="147.0" />
-  <parameter name="gui_output_clock_frequency1" value="147.0" />
+  <parameter name="gui_output_clock_frequency0" value="500.0" />
+  <parameter name="gui_output_clock_frequency1" value="62.5" />
   <parameter name="gui_output_clock_frequency10" value="100.0" />
   <parameter name="gui_output_clock_frequency11" value="100.0" />
   <parameter name="gui_output_clock_frequency12" value="100.0" />
@@ -894,7 +894,7 @@
   <parameter name="gui_pll_auto_reset" value="Off" />
   <parameter name="gui_pll_bandwidth_preset" value="Auto" />
   <parameter name="gui_pll_cascading_mode">Create an adjpllin signal to connect with an upstream PLL</parameter>
-  <parameter name="gui_pll_mode" value="Fractional-N PLL" />
+  <parameter name="gui_pll_mode" value="Integer-N PLL" />
   <parameter name="gui_ps_units0" value="ps" />
   <parameter name="gui_ps_units1" value="ps" />
   <parameter name="gui_ps_units10" value="ps" />
@@ -918,7 +918,7 @@
   <parameter name="gui_reference_clock_frequency" value="50.0" />
   <parameter name="gui_switchover_delay" value="0" />
   <parameter name="gui_switchover_mode">Automatic Switchover</parameter>
-  <parameter name="gui_use_locked" value="true" />
+  <parameter name="gui_use_locked" value="false" />
  </module>
  <module name="pll_mem" kind="altera_pll" version="18.0" enabled="1">
   <parameter name="debug_print_output" value="false" />
@@ -1151,6 +1151,21 @@
   <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
+ <connection
+   kind="clock"
+   version="18.0"
+   start="clk_50.clk"
+   end="mm_bridge_h2f_lw.clk" />
+ <connection
+   kind="clock"
+   version="18.0"
+   start="clk_50.clk"
+   end="hps_0.h2f_lw_axi_clock" />
+ <connection
+   kind="clock"
+   version="18.0"
+   start="clk_50.clk"
+   end="pll_reconfig_0.mgmt_clk" />
  <connection kind="clock" version="18.0" start="clk_50.clk" end="pll_mem.refclk" />
  <connection
    kind="clock"
@@ -1161,27 +1176,7 @@
    kind="clock"
    version="18.0"
    start="clock_bridge_0.out_clk"
-   end="mm_bridge_h2f_lw.clk" />
- <connection
-   kind="clock"
-   version="18.0"
-   start="clock_bridge_0.out_clk"
    end="hps_0.f2h_sdram0_clock" />
- <connection
-   kind="clock"
-   version="18.0"
-   start="clock_bridge_0.out_clk"
-   end="hps_0.h2f_axi_clock" />
- <connection
-   kind="clock"
-   version="18.0"
-   start="clock_bridge_0.out_clk"
-   end="hps_0.h2f_lw_axi_clock" />
- <connection
-   kind="clock"
-   version="18.0"
-   start="clock_bridge_0.out_clk"
-   end="pll_reconfig_0.mgmt_clk" />
  <connection
    kind="clock"
    version="18.0"

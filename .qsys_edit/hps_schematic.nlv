@@ -11,15 +11,15 @@ preplace inst hps.hps_0.dma -pg 1
 preplace inst hps.hps_0.eosc1 -pg 1
 preplace inst hps.hps_0.bridges -pg 1
 preplace inst hps.hps_0.fpga_interfaces -pg 1
-preplace inst hps.hps_0 -pg 1 -lvl 14 -y 100
+preplace inst hps.hps_0 -pg 1 -lvl 14 -y 160
 preplace inst hps.hps_0.dcan1 -pg 1
 preplace inst hps.hps_0.i2c3 -pg 1
 preplace inst hps.hps_0.gpio0 -pg 1
 preplace inst hps.hps_0.f2s_sdram_ref_clk -pg 1
 preplace inst hps.hps_0.eosc2 -pg 1
 preplace inst hps.hps_0.hps_io -pg 1
-preplace inst hps.clk_50 -pg 1 -lvl 15 -y 140
-preplace inst hps.pll_reconfig_0 -pg 1 -lvl 12 -y 390
+preplace inst hps.clk_50 -pg 1 -lvl 15 -y 200
+preplace inst hps.pll_reconfig_0 -pg 1 -lvl 12 -y 450
 preplace inst hps.hps_0.axi_sdram -pg 1
 preplace inst hps.hps_0.gpio1 -pg 1
 preplace inst hps.hps_0.wd_timer0 -pg 1
@@ -36,11 +36,11 @@ preplace inst hps.hps_0.gmac0 -pg 1
 preplace inst hps.hps_0.qspi -pg 1
 preplace inst hps.hps_0.timer0 -pg 1
 preplace inst hps.hps_0.sysmgr -pg 1
-preplace inst hps.pll_capture -pg 1 -lvl 12 -y 30
+preplace inst hps.pll_capture -pg 1 -lvl 12 -y 70
 preplace inst hps.hps_0.l3regs -pg 1
 preplace inst hps.hps_0.gmac1 -pg 1
 preplace inst hps.hps_0.timer1 -pg 1
-preplace inst hps.clock_bridge_0 -pg 1 -lvl 13 -y 290
+preplace inst hps.clock_bridge_0 -pg 1 -lvl 13 -y 330
 preplace inst hps.hps_0.timer2 -pg 1
 preplace inst hps.hps_0.f2s_periph_ref_clk -pg 1
 preplace inst hps.hps_0.hps_io.border -pg 1
@@ -51,27 +51,27 @@ preplace inst hps.hps_0.clk_0 -pg 1
 preplace inst hps.hps_0.sdrctl -pg 1
 preplace inst hps.hps_0.clkmgr -pg 1
 preplace inst hps.hps_0.arm_a9_1 -pg 1
-preplace inst hps.pll_mem -pg 1 -lvl 12 -y 270
+preplace inst hps.pll_mem -pg 1 -lvl 12 -y 310
 preplace inst hps.hps_0.L2 -pg 1
-preplace inst hps.mm_bridge_h2f_lw -pg 1 -lvl 11 -y 630
+preplace inst hps.mm_bridge_h2f_lw -pg 1 -lvl 11 -y 690
 preplace inst hps.hps_0.timer -pg 1
 preplace inst hps.hps_0.usb0 -pg 1
 preplace inst hps.hps_0.sdmmc -pg 1
 preplace inst hps.hps_0.i2c0 -pg 1
-preplace netloc EXPORT<net_container>hps</net_container>(SLAVE)hps.clk,(SLAVE)clk_50.clk_in) 1 0 15 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 240 NJ 300 NJ
-preplace netloc FAN_OUT<net_container>hps</net_container>(MASTER)clk_50.clk,(SLAVE)pll_mem.refclk,(SLAVE)pll_capture.refclk) 1 11 5 2830 220 NJ 220 NJ 280 NJ 130 3920
-preplace netloc EXPORT<net_container>hps</net_container>(MASTER)pll_capture.outclk0,(MASTER)hps.capture_clk) 1 12 4 NJ 100 NJ 60 NJ 60 NJ
-preplace netloc EXPORT<net_container>hps</net_container>(MASTER)hps.mem_clk,(MASTER)clock_bridge_0.out_clk_1) 1 13 3 NJ 320 NJ 320 NJ
-preplace netloc POINT_TO_POINT<net_container>hps</net_container>(SLAVE)pll_capture.reconfig_to_pll,(SLAVE)pll_reconfig_0.reconfig_to_pll) 1 11 1 2810
-preplace netloc POINT_TO_POINT<net_container>hps</net_container>(SLAVE)pll_reconfig_0.reconfig_from_pll,(SLAVE)pll_capture.reconfig_from_pll) 1 11 1 2790
-preplace netloc EXPORT<net_container>hps</net_container>(SLAVE)hps.memory,(SLAVE)hps_0.memory) 1 0 14 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ 180 NJ
-preplace netloc EXPORT<net_container>hps</net_container>(MASTER)hps.h2f_lw,(MASTER)mm_bridge_h2f_lw.m0) 1 11 5 NJ 660 NJ 660 NJ 660 NJ 660 NJ
-preplace netloc FAN_OUT<net_container>hps</net_container>(SLAVE)clk_50.clk_in_reset,(SLAVE)pll_reconfig_0.mgmt_reset,(SLAVE)mm_bridge_h2f_lw.reset,(MASTER)hps_0.h2f_reset) 1 10 5 2360 440 2750 520 NJ 520 NJ 520 3700
-preplace netloc POINT_TO_POINT<net_container>hps</net_container>(MASTER)pll_mem.outclk0,(SLAVE)clock_bridge_0.in_clk) 1 12 1 N
-preplace netloc EXPORT<net_container>hps</net_container>(SLAVE)hps.f2h_sdram0_data,(SLAVE)hps_0.f2h_sdram0_data) 1 0 14 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 160 NJ 130 NJ
-preplace netloc EXPORT<net_container>hps</net_container>(MASTER)hps.capture_clk_div8,(MASTER)pll_capture.outclk1) 1 12 4 NJ 80 NJ 40 NJ 40 NJ
-preplace netloc FAN_OUT<net_container>hps</net_container>(SLAVE)pll_reconfig_0.mgmt_clk,(SLAVE)hps_0.h2f_axi_clock,(SLAVE)mm_bridge_h2f_lw.clk,(MASTER)clock_bridge_0.out_clk,(SLAVE)hps_0.f2h_sdram0_clock,(SLAVE)hps_0.h2f_lw_axi_clock) 1 10 4 2340 420 2770 380 NJ 280 3330
-preplace netloc FAN_OUT<net_container>hps</net_container>(SLAVE)pll_mem.reset,(SLAVE)pll_capture.reset,(MASTER)clk_50.clk_reset) 1 11 5 2850 200 NJ 200 NJ 240 NJ 240 3920
-preplace netloc FAN_OUT<net_container>hps</net_container>(SLAVE)mm_bridge_h2f_lw.s0,(SLAVE)pll_reconfig_0.mgmt_avalon_slave,(MASTER)hps_0.h2f_lw_axi_master) 1 10 5 2320 400 2750 360 NJ 260 NJ 260 3660
-levelinfo -pg 1 0 110 4070
-levelinfo -hier hps 120 140 430 600 910 1080 1430 1600 1770 1990 2300 2640 2900 3140 3470 3750 3940
+preplace netloc EXPORT<net_container>hps</net_container>(SLAVE)hps.clk,(SLAVE)clk_50.clk_in) 1 0 15 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 60 NJ 60 NJ
+preplace netloc POINT_TO_POINT<net_container>hps</net_container>(SLAVE)clock_bridge_0.in_clk,(MASTER)pll_mem.outclk0) 1 12 1 N
+preplace netloc POINT_TO_POINT<net_container>hps</net_container>(SLAVE)pll_capture.reconfig_from_pll,(SLAVE)pll_reconfig_0.reconfig_from_pll) 1 11 1 2810
+preplace netloc FAN_OUT<net_container>hps</net_container>(SLAVE)clk_50.clk_in_reset,(SLAVE)mm_bridge_h2f_lw.reset,(SLAVE)pll_reconfig_0.mgmt_reset,(MASTER)hps_0.h2f_reset) 1 10 5 2360 500 2790 440 NJ 440 NJ 440 3820
+preplace netloc POINT_TO_POINT<net_container>hps</net_container>(MASTER)clock_bridge_0.out_clk,(SLAVE)hps_0.f2h_sdram0_clock) 1 13 1 3430
+preplace netloc FAN_OUT<net_container>hps</net_container>(SLAVE)pll_reconfig_0.mgmt_clk,(SLAVE)mm_bridge_h2f_lw.clk,(MASTER)clk_50.clk,(SLAVE)hps_0.h2f_lw_axi_clock,(SLAVE)pll_mem.refclk,(SLAVE)pll_capture.refclk) 1 10 6 2340 480 2750 260 NJ 260 3470 280 NJ 190 4060
+preplace netloc EXPORT<net_container>hps</net_container>(MASTER)pll_capture.outclk1,(MASTER)hps.capture_clk_div8) 1 12 4 NJ 230 NJ 100 NJ 100 NJ
+preplace netloc EXPORT<net_container>hps</net_container>(SLAVE)hps.memory,(SLAVE)hps_0.memory) 1 0 14 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ 300 NJ
+preplace netloc EXPORT<net_container>hps</net_container>(MASTER)hps.h2f_lw,(MASTER)mm_bridge_h2f_lw.m0) 1 11 5 NJ 720 NJ 720 NJ 720 NJ 720 NJ
+preplace netloc EXPORT<net_container>hps</net_container>(MASTER)hps.f2h_sdram0_clk,(MASTER)clock_bridge_0.out_clk_1) 1 13 3 NJ 360 NJ 360 NJ
+preplace netloc EXPORT<net_container>hps</net_container>(SLAVE)hps.f2h_sdram0_data,(SLAVE)hps_0.f2h_sdram0_data) 1 0 14 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 190 NJ
+preplace netloc EXPORT<net_container>hps</net_container>(MASTER)hps.capture_clk,(MASTER)pll_capture.outclk0) 1 12 4 NJ 210 NJ 80 NJ 80 NJ
+preplace netloc POINT_TO_POINT<net_container>hps</net_container>(SLAVE)pll_reconfig_0.reconfig_to_pll,(SLAVE)pll_capture.reconfig_to_pll) 1 11 1 2830
+preplace netloc FAN_OUT<net_container>hps</net_container>(SLAVE)pll_mem.reset,(SLAVE)pll_capture.reset,(MASTER)clk_50.clk_reset) 1 11 5 2850 280 NJ 280 NJ 120 NJ 120 4080
+preplace netloc FAN_OUT<net_container>hps</net_container>(MASTER)hps_0.h2f_lw_axi_master,(SLAVE)mm_bridge_h2f_lw.s0,(SLAVE)pll_reconfig_0.mgmt_avalon_slave) 1 10 5 2320 460 2770 420 NJ 420 NJ 420 3800
+levelinfo -pg 1 0 110 4230
+levelinfo -hier hps 120 140 430 600 910 1080 1430 1600 1770 1990 2300 2640 2900 3240 3610 3890 4100

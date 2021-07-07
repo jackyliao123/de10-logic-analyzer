@@ -1,5 +1,5 @@
 module sdram_interface(
-	input          rst,
+	input          rst_wr,
 	input          wr_clk,
 	input          wr_data_en,
 	input  [255:0] wr_data,
@@ -11,6 +11,7 @@ module sdram_interface(
 	input   [26:0] fill_addr_start,
 	input   [26:0] fill_addr_end,
 
+	input              rst_sdram,
 	input              sdram_clk,
 	output reg  [26:0] sdram_address,
 	output       [7:0] sdram_burstcount,
@@ -40,34 +41,44 @@ sdram_fifo fifo(
 	.q(sdram_writedata),
 	.rdempty(rd_empty),
 
-	.aclr(rst)
+	.aclr(rst_wr)
 );
 
 localparam
-		RESET = 0,
-		WAIT = 1,
-		XFER = 2;
+		WAIT = 0,
+		XFER = 1;
 
-reg [1:0] state;
-reg fill_launch_buf;
-reg fill_terminate_buf;
+reg state;
+reg [1:0] fill_launch_buf;
+reg [1:0] fill_terminate_buf;
 
 assign sdram_burstcount = 1;
 assign rd_ack = state == XFER && !sdram_waitrequest && !rd_empty;
-assign fill_running = state == XFER;
+assign fill_running_sdram = state == XFER;
+reg [1:0] fill_running_buf;
 
-always @(posedge sdram_clk, posedge rst) begin
-	if(rst) begin
-		state = RESET;
-		sdram_write <= 0;
+always @(posedge wr_clk, posedge rst_wr) begin
+	if(rst_wr) begin
+		fill_running_buf = 0;
 	end else begin
-		fill_launch_buf <= fill_launch;
-		fill_terminate_buf <= fill_terminate;
-		if(state == RESET) begin
-			state = WAIT;
-			sdram_write <= 0;
-		end else if(state == WAIT) begin
-			if(fill_launch_buf) begin
+		fill_running_buf = {fill_running_buf[0], fill_running_sdram};
+	end
+end
+
+assign fill_running = fill_running_buf[1];
+
+always @(posedge sdram_clk, posedge rst_sdram) begin
+	if(rst_sdram) begin
+		state = WAIT;
+		sdram_address <= 0;
+		sdram_write <= 0;
+		fill_launch_buf <= 0;
+		fill_terminate_buf <= 0;
+	end else begin
+		fill_launch_buf <= {fill_launch_buf[0], fill_launch};
+		fill_terminate_buf <= {fill_terminate_buf[0], fill_terminate};
+		if(state == WAIT) begin
+			if(fill_launch_buf[1]) begin
 				state = XFER;
 				sdram_write <= 1;
 				sdram_address <= fill_addr_start;
@@ -76,7 +87,7 @@ always @(posedge sdram_clk, posedge rst) begin
 			end
 		end else if(state == XFER) begin
 			if(rd_empty) begin
-				if(fill_terminate_buf) begin
+				if(fill_terminate_buf[1]) begin
 					state = WAIT;
 				end
 				sdram_write <= 0;

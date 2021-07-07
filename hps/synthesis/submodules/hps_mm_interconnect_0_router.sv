@@ -44,10 +44,10 @@
 
 module hps_mm_interconnect_0_router_default_decode
   #(
-     parameter DEFAULT_CHANNEL = 0,
+     parameter DEFAULT_CHANNEL = 1,
                DEFAULT_WR_CHANNEL = -1,
                DEFAULT_RD_CHANNEL = -1,
-               DEFAULT_DESTID = 1 
+               DEFAULT_DESTID = 0 
    )
   (output [87 - 87 : 0] default_destination_id,
    output [2-1 : 0] default_wr_channel,
@@ -134,7 +134,7 @@ module hps_mm_interconnect_0_router
     // Figure out the number of bits to mask off for each slave span
     // during address decoding
     // -------------------------------------------------------
-    localparam PAD0 = log2ceil(64'h40 - 64'h0); 
+    localparam PAD0 = log2ceil(64'h100 - 64'h0); 
     localparam PAD1 = log2ceil(64'h200 - 64'h100); 
     // -------------------------------------------------------
     // Work out which address bits are significant based on the
@@ -189,7 +189,7 @@ module hps_mm_interconnect_0_router
         // Sets the channel and destination ID based on the address
         // --------------------------------------------------
 
-    // ( 0x0 .. 0x40 )
+    // ( 0x0 .. 0x100 )
     if ( {address[RG:PAD0],{PAD0{1'b0}}} == 9'h0   ) begin
             src_channel = 2'b10;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
