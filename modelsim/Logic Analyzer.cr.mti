@@ -1,1 +1,27 @@
+/home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv {2 {vlog -work work -sv -stats=none /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module sdram_interface_tb
+** Warning: /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv(125): (vlog-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
+** Warning: /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv(126): (vlog-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
+** Warning: /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv(130): (vlog-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
+** Warning: /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv(131): (vlog-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
+** Warning: /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv(135): (vlog-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
 
+Top level modules:
+	sdram_interface_tb
+
+} {} {}} /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v {1 {vlog -work work -stats=none /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module sdram_a_fifo
+
+Top level modules:
+	sdram_a_fifo
+
+} {} {}} /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v {1 {vlog -work work -stats=none /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module sdram_d_fifo
+
+Top level modules:
+	sdram_d_fifo
+
+} {} {}}

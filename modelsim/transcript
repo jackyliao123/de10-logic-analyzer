@@ -1,31 +1,593 @@
 # Loading project Logic Analyzer
-# Compile of frontend.vhdl failed with 1 errors.
-# Compile of frontend.vhdl failed with 13 errors.
-# Compile of frontend.vhdl failed with 9 errors.
-# Error opening /home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv
-# Path name '/home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv' doesn't exist.
-# Compile of frontend.vhdl failed with 7 errors.
-# Compile of frontend.vhdl failed with 6 errors.
-# Compile of frontend.vhdl failed with 3 errors.
-# Compile of frontend.vhdl was successful.
-# Compile of frontend.vhdl was successful.
+# Compile of sdram_interface_tb.sv failed with 1 errors.
+# Compile of sdram_interface.sv failed with 3 errors.
+# Compile of sdram_interface.sv was successful.
+# Compile of sdram_interface_tb.sv failed with 1 errors.
+# 2 compiles, 1 failed with 1 error.
+# Compile of sdram_interface.sv was successful.
+# Compile of sdram_interface_tb.sv failed with 1 errors.
+# Compile of sdram_interface_tb.sv failed with 77 errors.
+# Compile of sdram_interface_tb.sv failed with 77 errors.
+# Compile of sdram_interface_tb.sv failed with 9 errors.
+# Compile of sdram_interface_tb.sv was successful.
+# Compile of sdram_interface_tb.sv was successful.
+vsim work.sdram_interface_tb
+# vsim work.sdram_interface_tb 
+# Start time: 15:01:35 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): Instantiation of 'sdram_d_fifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb File: /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(70): Instantiation of 'sdram_a_fifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb File: /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Error loading design
+# End time: 15:01:35 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# Compile of sdram_a_fifo.v was successful.
+# Compile of sdram_d_fifo.v was successful.
+# can't read "Startup(-L)": no such element in array
 # Load canceled
-vsim work.frontend
-# vsim work.frontend 
-# Start time: 20:37:36 on Jul 03,2021
+# can't read "Startup(-L)": no such element in array
+# Load canceled
+# can't read "Startup(-L)": no such element in array
+# Load canceled
+# Compile of sdram_a_fifo.v was successful.
+# can't read "Startup(-L)": no such element in array
+# Load canceled
+vsim work.sdram_a_fifo
+# vsim work.sdram_a_fifo 
+# Start time: 15:10:17 on Jul 13,2021
+# Loading work.sdram_a_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Error loading design
+# End time: 15:10:17 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vsim work.sdram_interface_tb
+# vsim work.sdram_interface_tb 
+# Start time: 15:10:19 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Loading work.sdram_a_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Error loading design
+# End time: 15:10:19 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+vcom -93 -work /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/libs/altera/vhdl/altera_mf -path {$MODEL_TECH/../altera/vhdl/src/altera_mf/altera_mf.vhd} /opt/altera/modelsim/modelsim_ase/altera/vhdl/src/altera_mf/altera_mf.vhd
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 15:11:11 on Jul 13,2021
+# vcom -reportprogress 300 -93 -work /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/libs/altera/vhdl/altera_mf -path $MODEL_TECH/../altera/vhdl/src/altera_mf/altera_mf.vhd /opt/altera/modelsim/modelsim_ase/altera/vhdl/src/altera_mf/altera_mf.vhd 
+# ** Error: (vcom-66) Execution of vlib failed. Please check the error log for more details.
+# sh: line 1: /opt/altera/modelsim/modelsim_ase/linuxpe/vlib: No such file or directory
+# End time: 15:11:11 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /opt/altera/modelsim/modelsim_ase/linuxaloem/vcom failed.
+vsim work.sdram_interface_tb
+# vsim work.sdram_interface_tb 
+# Start time: 15:11:19 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Loading work.sdram_a_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Error loading design
+# End time: 15:11:19 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+vsim work.sdram_interface_tb
+# vsim work.sdram_interface_tb 
+# Start time: 15:13:38 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Loading work.sdram_a_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Error loading design
+# End time: 15:13:38 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+vsim work.sdram_interface_tb altera_mf.dcfifo
+# vsim work.sdram_interface_tb altera_mf.dcfifo 
+# Start time: 15:15:07 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading work.sdram_a_fifo
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.frontend(main)
-add wave -position end  sim:/frontend/clk
-add wave -position end  sim:/frontend/reset
-add wave -position end  sim:/frontend/input
-add wave -position end  sim:/frontend/o_valid
-add wave -position end  sim:/frontend/output
-force -freeze sim:/frontend/clk 1 0, 0 {50 ps} -r 100
-force -freeze sim:/frontend/reset 1 0
-force -freeze sim:/frontend/input 1 0
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading altera_mf.altera_device_families(body)
+# Loading altera_mf.altera_mf_hint_evaluation(body)
+# Loading altera_mf.dcfifo(behavior)
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# Error loading design
+# End time: 15:15:07 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 26, Warnings: 0
+vsim work.sdram_interface_tb
+# vsim work.sdram_interface_tb 
+# Start time: 15:15:37 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Loading work.sdram_a_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Error loading design
+# End time: 15:15:37 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+vsim work.sdram_interface_tb
+# vsim work.sdram_interface_tb 
+# Start time: 15:16:08 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Loading work.sdram_a_fifo
+# ** Error: (vsim-3033) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(74): Instantiation of 'dcfifo' failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+#         Searched libraries:
+#             /home/jacky/fpga/logic_analyzer/modelsim/work
+# Error loading design
+# End time: 15:16:08 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+vsim work.sdram_interface_tb -L altera_mf -L altera
+# vsim work.sdram_interface_tb -L altera_mf -L altera 
+# Start time: 15:16:51 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading work.sdram_a_fifo
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# Error loading design
+# End time: 15:16:52 on Jul 13,2021, Elapsed time: 0:00:01
+# Errors: 26, Warnings: 0
+# Load canceled
+vsim -L altera_mf -L altera -L cyclonev work.sdram_interface_tb
+# vsim -L altera_mf -L altera -L cyclonev work.sdram_interface_tb 
+# Start time: 15:17:43 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading work.sdram_a_fifo
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# Error loading design
+# End time: 15:17:43 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 26, Warnings: 0
+vsim -L altera_mf -L altera -L cyclonev work.sdram_interface_tb
+# vsim -L altera_mf -L altera -L cyclonev work.sdram_interface_tb 
+# Start time: 15:20:33 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading work.sdram_a_fifo
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(90): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.intended_device_family.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(91): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_numwords.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(92): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_showahead.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(93): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_type.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(94): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_width.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(95): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.lpm_widthu.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(96): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.overflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(97): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.rdsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(98): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.read_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(99): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.underflow_checking.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(100): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.use_eab.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(101): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.write_aclr_synch.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# ** Error (suppressible): (vsim-10000) /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v(102): Unresolved defparam reference to 'dcfifo_component' in dcfifo_component.wrsync_delaypipe.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+# Error loading design
+# End time: 15:20:33 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 26, Warnings: 0
+vsim -L cyclonev -L altera_mf_ver work.sdram_interface_tb
+# vsim -L cyclonev -L altera_mf_ver work.sdram_interface_tb 
+# Start time: 15:22:15 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading altera_mf_ver.dcfifo
+# Loading altera_mf_ver.dcfifo_mixed_widths
+# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
+# Loading altera_mf_ver.dcfifo_low_latency
+# Loading altera_mf_ver.ALTERA_MF_HINT_EVALUATION
+# Loading altera_mf_ver.dcfifo_dffpipe
+# Loading work.sdram_a_fifo
+# Loading altera_mf_ver.dcfifo_async
+# Loading altera_mf_ver.dcfifo_fefifo
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ps  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+run
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.
+run
+run
+add wave -position insertpoint  \
+sim:/sdram_interface_tb/d_wr_rst \
+sim:/sdram_interface_tb/d_wr_clk \
+sim:/sdram_interface_tb/d_wr_en \
+sim:/sdram_interface_tb/d_wr_data \
+sim:/sdram_interface_tb/d_wr_full \
+sim:/sdram_interface_tb/d_wr_trig \
+sim:/sdram_interface_tb/d_wr_trig_sample \
+sim:/sdram_interface_tb/a_wr_rst \
+sim:/sdram_interface_tb/a_wr_clk \
+sim:/sdram_interface_tb/a_wr_en \
+sim:/sdram_interface_tb/a_wr_data \
+sim:/sdram_interface_tb/a_wr_full \
+sim:/sdram_interface_tb/fill_launch \
+sim:/sdram_interface_tb/fill_terminate \
+sim:/sdram_interface_tb/fill_running \
+sim:/sdram_interface_tb/fill_wrapped \
+sim:/sdram_interface_tb/fill_last_addr \
+sim:/sdram_interface_tb/fill_addr_start \
+sim:/sdram_interface_tb/fill_addr_end \
+sim:/sdram_interface_tb/trig_entries \
+sim:/sdram_interface_tb/trig_sample \
+sim:/sdram_interface_tb/trig_addr \
+sim:/sdram_interface_tb/triggered \
+sim:/sdram_interface_tb/sdram_rst \
+sim:/sdram_interface_tb/sdram_clk \
+sim:/sdram_interface_tb/sdram_address \
+sim:/sdram_interface_tb/sdram_burstcount \
+sim:/sdram_interface_tb/sdram_waitrequest \
+sim:/sdram_interface_tb/sdram_read \
+sim:/sdram_interface_tb/sdram_readdata \
+sim:/sdram_interface_tb/sdram_readdatavalid \
+sim:/sdram_interface_tb/sdram_write \
+sim:/sdram_interface_tb/sdram_writedata \
+sim:/sdram_interface_tb/sdram_byteenable
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+quit -sim
+# End time: 15:23:24 on Jul 13,2021, Elapsed time: 0:01:09
+# Errors: 0, Warnings: 13
+vsim -L cyclonev -L altera_mf_ver work.sdram_interface_tb -t ns
+# vsim -L cyclonev -L altera_mf_ver work.sdram_interface_tb -t ns 
+# Start time: 15:23:34 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading altera_mf_ver.dcfifo
+# Loading altera_mf_ver.dcfifo_mixed_widths
+# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
+# Loading altera_mf_ver.dcfifo_low_latency
+# Loading altera_mf_ver.ALTERA_MF_HINT_EVALUATION
+# Loading altera_mf_ver.dcfifo_dffpipe
+# Loading work.sdram_a_fifo
+# Loading altera_mf_ver.dcfifo_async
+# Loading altera_mf_ver.dcfifo_fefifo
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+add wave -position insertpoint  \
+sim:/sdram_interface_tb/d_wr_rst \
+sim:/sdram_interface_tb/d_wr_clk \
+sim:/sdram_interface_tb/d_wr_en \
+sim:/sdram_interface_tb/d_wr_data \
+sim:/sdram_interface_tb/d_wr_full \
+sim:/sdram_interface_tb/d_wr_trig \
+sim:/sdram_interface_tb/d_wr_trig_sample \
+sim:/sdram_interface_tb/a_wr_rst \
+sim:/sdram_interface_tb/a_wr_clk \
+sim:/sdram_interface_tb/a_wr_en \
+sim:/sdram_interface_tb/a_wr_data \
+sim:/sdram_interface_tb/a_wr_full \
+sim:/sdram_interface_tb/fill_launch \
+sim:/sdram_interface_tb/fill_terminate \
+sim:/sdram_interface_tb/fill_running \
+sim:/sdram_interface_tb/fill_wrapped \
+sim:/sdram_interface_tb/fill_last_addr \
+sim:/sdram_interface_tb/fill_addr_start \
+sim:/sdram_interface_tb/fill_addr_end \
+sim:/sdram_interface_tb/trig_entries \
+sim:/sdram_interface_tb/trig_sample \
+sim:/sdram_interface_tb/trig_addr \
+sim:/sdram_interface_tb/triggered \
+sim:/sdram_interface_tb/sdram_rst \
+sim:/sdram_interface_tb/sdram_clk \
+sim:/sdram_interface_tb/sdram_address \
+sim:/sdram_interface_tb/sdram_burstcount \
+sim:/sdram_interface_tb/sdram_waitrequest \
+sim:/sdram_interface_tb/sdram_read \
+sim:/sdram_interface_tb/sdram_readdata \
+sim:/sdram_interface_tb/sdram_readdatavalid \
+sim:/sdram_interface_tb/sdram_write \
+sim:/sdram_interface_tb/sdram_writedata \
+sim:/sdram_interface_tb/sdram_byteenable
 run
 # ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
 # ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
@@ -45,25 +607,11 @@ run
 run
 run
 run
+run -continue
 run
 run
 run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-force -freeze sim:/frontend/reset 0 0
-run
-run
-run
-run
-run
+# Can't move the Now cursor.
 run
 run
 run
@@ -85,7 +633,6 @@ run
 run
 run
 run
-force -freeze sim:/frontend/input 0 0
 run
 run
 run
@@ -93,18 +640,362 @@ run
 run
 run
 run
-force -freeze sim:/frontend/input 1 0
-run
-force -freeze sim:/frontend/input 0 0
-run
-run
-force -freeze sim:/frontend/input 1 0
 run
 run
 run
 run
 run
-# Compile of frontend.vhdl failed with 5 errors.
-# Compile of frontend.vhdl failed with 3 errors.
-# Compile of frontend.vhdl failed with 3 errors.
-# Compile of frontend.vhdl was successful.
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run -all
+quit -sim
+# End time: 15:29:28 on Jul 13,2021, Elapsed time: 0:05:54
+# Errors: 1, Warnings: 13
+vlog -work work -sv /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 15:29:31 on Jul 13,2021
+# vlog -reportprogress 300 -work work -sv /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv 
+# -- Compiling module sdram_interface_tb
+# 
+# Top level modules:
+# 	sdram_interface_tb
+# End time: 15:29:31 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vlog -work work -sv /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 15:29:34 on Jul 13,2021
+# vlog -reportprogress 300 -work work -sv /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv 
+# -- Compiling module sdram_interface
+# 
+# Top level modules:
+# 	sdram_interface
+# End time: 15:29:34 on Jul 13,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -L cyclonev -L altera_mf_ver -t ns work.sdram_interface_tb
+# vsim -L cyclonev -L altera_mf_ver -t ns work.sdram_interface_tb 
+# Start time: 15:29:40 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading altera_mf_ver.dcfifo
+# Loading altera_mf_ver.dcfifo_mixed_widths
+# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
+# Loading altera_mf_ver.dcfifo_low_latency
+# Loading altera_mf_ver.ALTERA_MF_HINT_EVALUATION
+# Loading altera_mf_ver.dcfifo_dffpipe
+# Loading work.sdram_a_fifo
+# Loading altera_mf_ver.dcfifo_async
+# Loading altera_mf_ver.dcfifo_fefifo
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+add wave -position end  sim:/sdram_interface_tb/d_wr_rst
+add wave -position end  sim:/sdram_interface_tb/d_wr_clk
+add wave -position end  sim:/sdram_interface_tb/d_wr_en
+add wave -position end  sim:/sdram_interface_tb/d_wr_data
+add wave -position end  sim:/sdram_interface_tb/d_wr_full
+add wave -position end  sim:/sdram_interface_tb/d_wr_trig
+add wave -position end  sim:/sdram_interface_tb/d_wr_trig_sample
+add wave -position end  sim:/sdram_interface_tb/a_wr_rst
+add wave -position end  sim:/sdram_interface_tb/a_wr_clk
+add wave -position end  sim:/sdram_interface_tb/a_wr_en
+add wave -position end  sim:/sdram_interface_tb/a_wr_data
+add wave -position end  sim:/sdram_interface_tb/a_wr_full
+add wave -position end  sim:/sdram_interface_tb/fill_launch
+add wave -position end  sim:/sdram_interface_tb/fill_terminate
+add wave -position end  sim:/sdram_interface_tb/fill_running
+add wave -position end  sim:/sdram_interface_tb/fill_wrapped
+add wave -position end  sim:/sdram_interface_tb/fill_last_addr
+add wave -position end  sim:/sdram_interface_tb/fill_addr_start
+add wave -position end  sim:/sdram_interface_tb/fill_addr_end
+add wave -position end  sim:/sdram_interface_tb/trig_entries
+add wave -position end  sim:/sdram_interface_tb/trig_sample
+add wave -position end  sim:/sdram_interface_tb/trig_addr
+add wave -position end  sim:/sdram_interface_tb/triggered
+add wave -position end  sim:/sdram_interface_tb/sdram_rst
+add wave -position end  sim:/sdram_interface_tb/sdram_clk
+add wave -position end  sim:/sdram_interface_tb/sdram_address
+add wave -position end  sim:/sdram_interface_tb/sdram_burstcount
+add wave -position end  sim:/sdram_interface_tb/sdram_waitrequest
+add wave -position end  sim:/sdram_interface_tb/sdram_read
+add wave -position end  sim:/sdram_interface_tb/sdram_readdata
+add wave -position end  sim:/sdram_interface_tb/sdram_readdatavalid
+add wave -position end  sim:/sdram_interface_tb/sdram_write
+add wave -position end  sim:/sdram_interface_tb/sdram_writedata
+add wave -position end  sim:/sdram_interface_tb/sdram_byteenable
+run -all
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.
+# Compile of sdram_interface.sv was successful.
+# Compile of sdram_interface_tb.sv failed with 1 errors.
+# 2 compiles, 1 failed with 1 error.
+# Compile of sdram_interface_tb.sv was successful.
+quit -sim
+# End time: 15:34:32 on Jul 13,2021, Elapsed time: 0:04:52
+# Errors: 0, Warnings: 13
+vsim -L cyclonev -L altera_mf_ver -t ns work.sdram_interface_tb
+# vsim -L cyclonev -L altera_mf_ver -t ns work.sdram_interface_tb 
+# Start time: 15:34:37 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading altera_mf_ver.dcfifo
+# Loading altera_mf_ver.dcfifo_mixed_widths
+# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
+# Loading altera_mf_ver.dcfifo_low_latency
+# Loading altera_mf_ver.ALTERA_MF_HINT_EVALUATION
+# Loading altera_mf_ver.dcfifo_dffpipe
+# Loading work.sdram_a_fifo
+# Loading altera_mf_ver.dcfifo_async
+# Loading altera_mf_ver.dcfifo_fefifo
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+run -all
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.
+restart -f
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+restart -f -nolist -nowave -nolog -nobreak -novirtuals -noassertions -nofcovers -noatv
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+add wave -position end  sim:/sdram_interface_tb/d_wr_rst
+add wave -position end  sim:/sdram_interface_tb/d_wr_clk
+add wave -position end  sim:/sdram_interface_tb/d_wr_en
+add wave -position end  sim:/sdram_interface_tb/d_wr_data
+add wave -position end  sim:/sdram_interface_tb/d_wr_full
+add wave -position end  sim:/sdram_interface_tb/d_wr_trig
+add wave -position end  sim:/sdram_interface_tb/d_wr_trig_sample
+add wave -position end  sim:/sdram_interface_tb/a_wr_rst
+add wave -position end  sim:/sdram_interface_tb/a_wr_clk
+add wave -position end  sim:/sdram_interface_tb/a_wr_en
+add wave -position end  sim:/sdram_interface_tb/a_wr_data
+add wave -position end  sim:/sdram_interface_tb/a_wr_full
+add wave -position end  sim:/sdram_interface_tb/fill_launch
+add wave -position end  sim:/sdram_interface_tb/fill_terminate
+add wave -position end  sim:/sdram_interface_tb/fill_running
+add wave -position end  sim:/sdram_interface_tb/fill_wrapped
+add wave -position end  sim:/sdram_interface_tb/fill_last_addr
+add wave -position end  sim:/sdram_interface_tb/fill_addr_start
+add wave -position end  sim:/sdram_interface_tb/fill_addr_end
+add wave -position end  sim:/sdram_interface_tb/trig_entries
+add wave -position end  sim:/sdram_interface_tb/trig_sample
+add wave -position end  sim:/sdram_interface_tb/trig_addr
+add wave -position end  sim:/sdram_interface_tb/triggered
+add wave -position end  sim:/sdram_interface_tb/sdram_rst
+add wave -position end  sim:/sdram_interface_tb/sdram_clk
+add wave -position end  sim:/sdram_interface_tb/sdram_address
+add wave -position end  sim:/sdram_interface_tb/sdram_burstcount
+add wave -position end  sim:/sdram_interface_tb/sdram_waitrequest
+add wave -position end  sim:/sdram_interface_tb/sdram_read
+add wave -position end  sim:/sdram_interface_tb/sdram_readdata
+add wave -position end  sim:/sdram_interface_tb/sdram_readdatavalid
+add wave -position end  sim:/sdram_interface_tb/sdram_write
+add wave -position end  sim:/sdram_interface_tb/sdram_writedata
+add wave -position end  sim:/sdram_interface_tb/sdram_byteenable
+run -all
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.
+quit -sim
+# End time: 15:58:09 on Jul 13,2021, Elapsed time: 0:23:32
+# Errors: 0, Warnings: 31
+# Compile of sdram_interface_tb.sv was successful with warnings.
+vsim -L cyclonev -L altera_mf_ver -t ns work.sdram_interface_tb
+# vsim -L cyclonev -L altera_mf_ver -t ns work.sdram_interface_tb 
+# Start time: 15:58:19 on Jul 13,2021
+# Loading sv_std.std
+# Loading work.sdram_interface_tb
+# Loading work.sdram_interface
+# Loading work.sdram_d_fifo
+# Loading altera_mf_ver.dcfifo
+# Loading altera_mf_ver.dcfifo_mixed_widths
+# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
+# Loading altera_mf_ver.dcfifo_low_latency
+# Loading altera_mf_ver.ALTERA_MF_HINT_EVALUATION
+# Loading altera_mf_ver.dcfifo_dffpipe
+# Loading work.sdram_a_fifo
+# Loading altera_mf_ver.dcfifo_async
+# Loading altera_mf_ver.dcfifo_fefifo
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+run
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.
+# Break key hit
+restart -f
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+add wave -position end  sim:/sdram_interface_tb/d_wr_trig
+add wave -position end  sim:/sdram_interface_tb/d_wr_rst
+add wave -position end  sim:/sdram_interface_tb/d_wr_clk
+add wave -position end  sim:/sdram_interface_tb/d_wr_en
+add wave -position end  sim:/sdram_interface_tb/d_wr_data
+add wave -position end  sim:/sdram_interface_tb/d_wr_full
+add wave -position end  sim:/sdram_interface_tb/d_wr_trig
+add wave -position end  sim:/sdram_interface_tb/d_wr_trig_sample
+add wave -position end  sim:/sdram_interface_tb/a_wr_rst
+add wave -position end  sim:/sdram_interface_tb/a_wr_clk
+add wave -position end  sim:/sdram_interface_tb/a_wr_en
+add wave -position end  sim:/sdram_interface_tb/a_wr_data
+add wave -position end  sim:/sdram_interface_tb/a_wr_full
+add wave -position end  sim:/sdram_interface_tb/fill_launch
+add wave -position end  sim:/sdram_interface_tb/fill_terminate
+add wave -position end  sim:/sdram_interface_tb/fill_running
+add wave -position end  sim:/sdram_interface_tb/fill_wrapped
+add wave -position end  sim:/sdram_interface_tb/fill_last_addr
+add wave -position end  sim:/sdram_interface_tb/fill_addr_start
+add wave -position end  sim:/sdram_interface_tb/fill_addr_end
+add wave -position end  sim:/sdram_interface_tb/trig_entries
+add wave -position end  sim:/sdram_interface_tb/trig_sample
+add wave -position end  sim:/sdram_interface_tb/trig_addr
+add wave -position end  sim:/sdram_interface_tb/triggered
+add wave -position end  sim:/sdram_interface_tb/sdram_rst
+add wave -position end  sim:/sdram_interface_tb/sdram_clk
+add wave -position end  sim:/sdram_interface_tb/sdram_address
+add wave -position end  sim:/sdram_interface_tb/sdram_burstcount
+add wave -position end  sim:/sdram_interface_tb/sdram_waitrequest
+add wave -position end  sim:/sdram_interface_tb/sdram_read
+add wave -position end  sim:/sdram_interface_tb/sdram_readdata
+add wave -position end  sim:/sdram_interface_tb/sdram_readdatavalid
+add wave -position end  sim:/sdram_interface_tb/sdram_write
+add wave -position end  sim:/sdram_interface_tb/sdram_writedata
+add wave -position end  sim:/sdram_interface_tb/sdram_byteenable
+run -all
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.
+# Compile of sdram_interface_tb.sv failed with 1 errors.
+# Compile of sdram_interface_tb.sv failed with 1 errors.
+# Compile of sdram_interface_tb.sv was successful with warnings.
+restart -f
+# Loading work.sdram_interface_tb
+# ** Warning: (vsim-3015) /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv(57): [PCDPC] - Port size (260) does not match connection size (258) for port 'q'. The port definition is at: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v(46).
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo File: /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/d_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+# ** Warning: (vsim-3017) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Too few port connections. Expected 14, found 13.
+#    Time: 0 ns  Iteration: 0  Instance: /sdram_interface_tb/sdram_iface_tb/a_fifo/dcfifo_component/DCFIFO_MW File: /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v
+# ** Warning: (vsim-3722) /build/swbuild/SJ/nightly/18.0std/614/l64/work/modelsim/eda/sim_lib/altera_mf.v(31790): [TFMPC] - Missing connection for port 'eccstatus'.
+run -all
+# ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libpthread.so.0 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/librt.so.1 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libdl.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libm.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libc.so.6 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /lib/ld-linux.so.2 : module was loaded at an absolute address.
+# ** Warning: (vsim-3116) Problem reading symbols from /usr/lib32/libnss_files.so.2 : module was loaded at an absolute address.

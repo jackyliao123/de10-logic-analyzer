@@ -20,7 +20,13 @@ set_output_delay -clock altera_reserved_tck 3 [get_ports altera_reserved_tdo]
 # Create Generated Clock
 #**************************************************************
 derive_pll_clocks
+remove_clock [get_clocks *cascadeout]
+remove_clock [get_clocks *vcoph*]
 
+create_clock -add -period "500.0 MHz" {u0|pll_capture|altera_pll_i|cyclonev_pll|counter[3].output_counter|divclk}
+create_clock -add -period "62.5 MHz" [get_nets frontend|clk_gen[3]]
+create_clock -add -period "40.0 MHz" {u0|pll_adc|altera_pll_i|cyclonev_pll|counter[3].output_counter|divclk}
+create_clock -add -period "100.0 MHz" {u0|pll_mem|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk}
 
 
 #**************************************************************
@@ -51,7 +57,8 @@ derive_clock_uncertainty
 #**************************************************************
 # Set Clock Groups
 #**************************************************************
-set_clock_groups -asynchronous -group [get_ports FPGA_CLK1_50] -group [get_ports data_clk]
+set_clock_groups -asynchronous -group {FPGA_CLK1_50} -group [get_clocks *pll_capture|*|divclk] [get_clocks *frontend|clk_gen[3]*] -group [get_clocks *pll_mem|*|divclk] -group [get_clocks *pll_adc|*|divclk]
+
 
 
 #**************************************************************

@@ -1,8 +1,9 @@
 
 module hps (
-	capture_clk_clk,
-	capture_clk_div8_clk,
 	clk_clk,
+	clk_adc_clk,
+	clk_capture_clk,
+	debug_clk_clk,
 	f2h_sdram0_clk_clk,
 	f2h_sdram0_data_address,
 	f2h_sdram0_data_burstcount,
@@ -40,9 +41,10 @@ module hps (
 	memory_mem_dm,
 	memory_oct_rzqin);	
 
-	output		capture_clk_clk;
-	output		capture_clk_div8_clk;
 	input		clk_clk;
+	output		clk_adc_clk;
+	output		clk_capture_clk;
+	output		debug_clk_clk;
 	output		f2h_sdram0_clk_clk;
 	input	[26:0]	f2h_sdram0_data_address;
 	input	[7:0]	f2h_sdram0_data_burstcount;

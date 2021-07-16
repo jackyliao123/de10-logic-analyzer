@@ -1,10 +1,10 @@
-// megafunction wizard: %FIFO%
+// megafunction wizard: %FIFO%VBB%
 // GENERATION: STANDARD
 // VERSION: WM1.0
 // MODULE: dcfifo 
 
 // ============================================================
-// File Name: sdram_fifo.v
+// File Name: sdram_a_fifo.v
 // Megafunction Name(s):
 // 			dcfifo
 //
@@ -16,7 +16,6 @@
 //
 // 18.0.0 Build 614 04/24/2018 SJ Standard Edition
 // ************************************************************
-
 
 //Copyright (C) 2018  Intel Corporation. All rights reserved.
 //Your use of Intel Corporation's design tools, logic functions 
@@ -32,11 +31,7 @@
 //Intel and sold by Intel or its authorized distributors.  Please
 //refer to the applicable agreement for further details.
 
-
-// synopsys translate_off
-`timescale 1 ps / 1 ps
-// synopsys translate_on
-module sdram_fifo (
+module sdram_a_fifo (
 	aclr,
 	data,
 	rdclk,
@@ -48,12 +43,12 @@ module sdram_fifo (
 	wrfull);
 
 	input	  aclr;
-	input	[255:0]  data;
+	input	[15:0]  data;
 	input	  rdclk;
 	input	  rdreq;
 	input	  wrclk;
 	input	  wrreq;
-	output	[255:0]  q;
+	output	[15:0]  q;
 	output	  rdempty;
 	output	  wrfull;
 `ifndef ALTERA_RESERVED_QIS
@@ -63,45 +58,6 @@ module sdram_fifo (
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_on
 `endif
-
-	wire [255:0] sub_wire0;
-	wire  sub_wire1;
-	wire  sub_wire2;
-	wire [255:0] q = sub_wire0[255:0];
-	wire  rdempty = sub_wire1;
-	wire  wrfull = sub_wire2;
-
-	dcfifo	dcfifo_component (
-				.aclr (aclr),
-				.data (data),
-				.rdclk (rdclk),
-				.rdreq (rdreq),
-				.wrclk (wrclk),
-				.wrreq (wrreq),
-				.q (sub_wire0),
-				.rdempty (sub_wire1),
-				.wrfull (sub_wire2),
-				.eccstatus (),
-				.rdfull (),
-				.rdusedw (),
-				.wrempty (),
-				.wrusedw ());
-	defparam
-		dcfifo_component.add_usedw_msb_bit = "ON",
-		dcfifo_component.intended_device_family = "Cyclone V",
-		dcfifo_component.lpm_numwords = 256,
-		dcfifo_component.lpm_showahead = "ON",
-		dcfifo_component.lpm_type = "dcfifo",
-		dcfifo_component.lpm_width = 256,
-		dcfifo_component.lpm_widthu = 9,
-		dcfifo_component.overflow_checking = "ON",
-		dcfifo_component.rdsync_delaypipe = 4,
-		dcfifo_component.read_aclr_synch = "OFF",
-		dcfifo_component.underflow_checking = "ON",
-		dcfifo_component.use_eab = "ON",
-		dcfifo_component.write_aclr_synch = "OFF",
-		dcfifo_component.wrsync_delaypipe = 4;
-
 
 endmodule
 
@@ -114,7 +70,7 @@ endmodule
 // Retrieval info: PRIVATE: AlmostFullThr NUMERIC "-1"
 // Retrieval info: PRIVATE: CLOCKS_ARE_SYNCHRONIZED NUMERIC "0"
 // Retrieval info: PRIVATE: Clock NUMERIC "4"
-// Retrieval info: PRIVATE: Depth NUMERIC "256"
+// Retrieval info: PRIVATE: Depth NUMERIC "128"
 // Retrieval info: PRIVATE: Empty NUMERIC "1"
 // Retrieval info: PRIVATE: Full NUMERIC "1"
 // Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone V"
@@ -127,11 +83,11 @@ endmodule
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 // Retrieval info: PRIVATE: UNDERFLOW_CHECKING NUMERIC "0"
 // Retrieval info: PRIVATE: UsedW NUMERIC "1"
-// Retrieval info: PRIVATE: Width NUMERIC "256"
+// Retrieval info: PRIVATE: Width NUMERIC "16"
 // Retrieval info: PRIVATE: dc_aclr NUMERIC "1"
 // Retrieval info: PRIVATE: diff_widths NUMERIC "0"
-// Retrieval info: PRIVATE: msb_usedw NUMERIC "1"
-// Retrieval info: PRIVATE: output_width NUMERIC "256"
+// Retrieval info: PRIVATE: msb_usedw NUMERIC "0"
+// Retrieval info: PRIVATE: output_width NUMERIC "16"
 // Retrieval info: PRIVATE: rsEmpty NUMERIC "1"
 // Retrieval info: PRIVATE: rsFull NUMERIC "0"
 // Retrieval info: PRIVATE: rsUsedW NUMERIC "0"
@@ -141,13 +97,12 @@ endmodule
 // Retrieval info: PRIVATE: wsFull NUMERIC "1"
 // Retrieval info: PRIVATE: wsUsedW NUMERIC "0"
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
-// Retrieval info: CONSTANT: ADD_USEDW_MSB_BIT STRING "ON"
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone V"
-// Retrieval info: CONSTANT: LPM_NUMWORDS NUMERIC "256"
+// Retrieval info: CONSTANT: LPM_NUMWORDS NUMERIC "128"
 // Retrieval info: CONSTANT: LPM_SHOWAHEAD STRING "ON"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "dcfifo"
-// Retrieval info: CONSTANT: LPM_WIDTH NUMERIC "256"
-// Retrieval info: CONSTANT: LPM_WIDTHU NUMERIC "9"
+// Retrieval info: CONSTANT: LPM_WIDTH NUMERIC "16"
+// Retrieval info: CONSTANT: LPM_WIDTHU NUMERIC "7"
 // Retrieval info: CONSTANT: OVERFLOW_CHECKING STRING "ON"
 // Retrieval info: CONSTANT: RDSYNC_DELAYPIPE NUMERIC "4"
 // Retrieval info: CONSTANT: READ_ACLR_SYNCH STRING "OFF"
@@ -156,8 +111,8 @@ endmodule
 // Retrieval info: CONSTANT: WRITE_ACLR_SYNCH STRING "OFF"
 // Retrieval info: CONSTANT: WRSYNC_DELAYPIPE NUMERIC "4"
 // Retrieval info: USED_PORT: aclr 0 0 0 0 INPUT GND "aclr"
-// Retrieval info: USED_PORT: data 0 0 256 0 INPUT NODEFVAL "data[255..0]"
-// Retrieval info: USED_PORT: q 0 0 256 0 OUTPUT NODEFVAL "q[255..0]"
+// Retrieval info: USED_PORT: data 0 0 16 0 INPUT NODEFVAL "data[15..0]"
+// Retrieval info: USED_PORT: q 0 0 16 0 OUTPUT NODEFVAL "q[15..0]"
 // Retrieval info: USED_PORT: rdclk 0 0 0 0 INPUT NODEFVAL "rdclk"
 // Retrieval info: USED_PORT: rdempty 0 0 0 0 OUTPUT NODEFVAL "rdempty"
 // Retrieval info: USED_PORT: rdreq 0 0 0 0 INPUT NODEFVAL "rdreq"
@@ -165,18 +120,18 @@ endmodule
 // Retrieval info: USED_PORT: wrfull 0 0 0 0 OUTPUT NODEFVAL "wrfull"
 // Retrieval info: USED_PORT: wrreq 0 0 0 0 INPUT NODEFVAL "wrreq"
 // Retrieval info: CONNECT: @aclr 0 0 0 0 aclr 0 0 0 0
-// Retrieval info: CONNECT: @data 0 0 256 0 data 0 0 256 0
+// Retrieval info: CONNECT: @data 0 0 16 0 data 0 0 16 0
 // Retrieval info: CONNECT: @rdclk 0 0 0 0 rdclk 0 0 0 0
 // Retrieval info: CONNECT: @rdreq 0 0 0 0 rdreq 0 0 0 0
 // Retrieval info: CONNECT: @wrclk 0 0 0 0 wrclk 0 0 0 0
 // Retrieval info: CONNECT: @wrreq 0 0 0 0 wrreq 0 0 0 0
-// Retrieval info: CONNECT: q 0 0 256 0 @q 0 0 256 0
+// Retrieval info: CONNECT: q 0 0 16 0 @q 0 0 16 0
 // Retrieval info: CONNECT: rdempty 0 0 0 0 @rdempty 0 0 0 0
 // Retrieval info: CONNECT: wrfull 0 0 0 0 @wrfull 0 0 0 0
-// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_fifo.v TRUE
-// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_fifo.inc FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_fifo.cmp FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_fifo.bsf FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_fifo_inst.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_fifo_bb.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_a_fifo.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_a_fifo.inc FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_a_fifo.cmp FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_a_fifo.bsf FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_a_fifo_inst.v FALSE
+// Retrieval info: GEN_FILE: TYPE_NORMAL sdram_a_fifo_bb.v TRUE
 // Retrieval info: LIB_FILE: altera_mf

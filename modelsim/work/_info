@@ -8,134 +8,93 @@ z2
 !i10f 100
 cModel Technology
 d/opt/altera/modelsim/modelsim_ase
-vcapture_frontend
-Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-!s110 1624547842
+vsdram_a_fifo
+!s110 1626203346
 !i10b 1
-!s100 j6KMj9]Kn^g^IPT]CkD7_3
-Il?Q8FZ=c2j0001;XQjDQ<0
-Z1 VDg1SIo80bB@j0V0VzS_@n1
-!s105 capture_frontend_sv_unit
-S1
-Z2 d/home/jacky/fpga/logic_analyzer/modelsim
-w1624544916
-8/home/jacky/fpga/logic_analyzer/src/capture_frontend.sv
-F/home/jacky/fpga/logic_analyzer/src/capture_frontend.sv
-L0 1
+!s100 QdGKZ7_Glhc<d:NeAL@_b2
+IY3Tg3m?8cEOEGh;@4:UY`3
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 d/home/jacky/fpga/logic_analyzer/modelsim
+w1626040329
+8/home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+F/home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v
+Z2 L0 39
 Z3 OV;L;10.5b;63
 r1
 !s85 0
 31
-!s108 1624547842.000000
-!s107 /home/jacky/fpga/logic_analyzer/src/capture_frontend.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|/home/jacky/fpga/logic_analyzer/src/capture_frontend.sv|
+!s108 1626203346.000000
+!s107 /home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|/home/jacky/fpga/logic_analyzer/src/sdram_a_fifo/sdram_a_fifo.v|
 !i113 1
-Z4 o-work work -sv
+Z4 o-work work
 Z5 tCvgOpt 0
-vcapture_mem_write
-R0
-!s110 1624547832
+vsdram_d_fifo
+!s110 1626203001
 !i10b 1
-!s100 ikj@f<QgPL4c4JKT[o<Pc3
-I[0LmRhXloo1Kmjn;ADK^O1
+!s100 Bo^NXTTgDZKPaID=Una<D2
+IN^@dT]HOX6JCi84PGD9<50
+R0
 R1
-!s105 capture_mem_write_sv_unit
-S1
+w1626040066
+8/home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
+F/home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v
 R2
-w1624492128
-8/home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv
-F/home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv
+R3
+r1
+!s85 0
+31
+!s108 1626203001.000000
+!s107 /home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v|
+!s90 -reportprogress|300|-work|work|-stats=none|/home/jacky/fpga/logic_analyzer/src/sdram_d_fifo/sdram_d_fifo.v|
+!i113 1
+R4
+R5
+vsdram_interface
+Z6 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+!s110 1626204827
+!i10b 1
+!s100 EVnL05bOEn20PGzl92]Ao0
+IFBciTKF0_Gz0l@j^1Q^6A0
+R0
+!s105 sdram_interface_sv_unit
+S1
+R1
+w1626204800
+8/home/jacky/fpga/logic_analyzer/src/sdram_interface.sv
+F/home/jacky/fpga/logic_analyzer/src/sdram_interface.sv
 L0 1
 R3
 r1
 !s85 0
 31
-!s108 1624547832.000000
-!s107 /home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv|
-!s90 -reportprogress|300|-work|work|-sv|/home/jacky/fpga/logic_analyzer/src/capture_mem_write.sv|
+!s108 1626204827.000000
+!s107 /home/jacky/fpga/logic_analyzer/src/sdram_interface.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|/home/jacky/fpga/logic_analyzer/src/sdram_interface.sv|
 !i113 1
-R4
+Z7 o-work work -sv
 R5
-Efrontend
-Z6 w1625364561
-Z7 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
-Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
-Z9 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
-R2
-Z10 8/home/jacky/fpga/logic_analyzer/src/frontend.vhdl
-Z11 F/home/jacky/fpga/logic_analyzer/src/frontend.vhdl
-l0
-L75
-VZNH[z>FXZT4oa4VK5WXA;2
-!s100 JhiM0g4Q3SB69QPY>[OAa0
-Z12 OV;C;10.5b;63
-32
-Z13 !s110 1625364570
-!i10b 1
-Z14 !s108 1625364570.000000
-Z15 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|/home/jacky/fpga/logic_analyzer/src/frontend.vhdl|
-Z16 !s107 /home/jacky/fpga/logic_analyzer/src/frontend.vhdl|
-!i113 1
-Z17 o-work work -2002 -explicit
-Z18 tExplicit 1 CvgOpt 0
-Amain
-Z19 DEx4 work 13 frontend_part 0 22 GYhe9T<iW?CIGQ5oSd7Z^0
-R7
-R8
-R9
-DEx4 work 8 frontend 0 22 ZNH[z>FXZT4oa4VK5WXA;2
-l89
-L85
-V2a4mAU><8bk3eI4]afOMb3
-!s100 NE_216iQ4]`aS0I8;E<[F0
-R12
-32
-R13
-!i10b 1
-R14
-R15
-R16
-!i113 1
-R17
-R18
-Efrontend_part
+vsdram_interface_tb
 R6
-R7
-R8
-R9
-R2
-R10
-R11
-l0
-L5
-VGYhe9T<iW?CIGQ5oSd7Z^0
-!s100 SO4S@X5gVJ4;Ao4]OCUbb3
-R12
-32
-R13
+!s110 1626206680
 !i10b 1
-R14
-R15
-R16
+!s100 3UIzGkiiO<JWKmU^d=<Ga3
+I?AoYUz24?5_`aImRnL_7m2
+R0
+!s105 sdram_interface_tb_sv_unit
+S1
+R1
+w1626206676
+8/home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv
+F/home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv
+L0 3
+R3
+r1
+!s85 0
+31
+!s108 1626206680.000000
+!s107 /home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|/home/jacky/fpga/logic_analyzer/testbench/sdram_interface_tb.sv|
 !i113 1
-R17
-R18
-Amain
 R7
-R8
-R9
-R19
-l28
-L15
-Z20 V6?1@`R16zn`fR>^Se?X>Y2
-Z21 !s100 H>:AW>WfmWSdj:VaYA3<91
-R12
-32
-R13
-!i10b 1
-R14
-R15
-R16
-!i113 1
-R17
-R18
+R5

@@ -89,12 +89,12 @@ always @(posedge mm_clk, posedge rst) begin
 				state <= DONE;
 				mm_waitrequest <= 0;
 			end else begin
-				timeout_ctr <= timeout_ctr + 1;
+				timeout_ctr <= timeout_ctr + 16'h1;
 			end
 		end else if(state == READ_WAIT) begin
 			if(timeout_ctr == 16'h3ff) begin
 				state <= DONE;
-				mm_readdata <= 32'hffffffff;
+				mm_readdata <= buf_readdata[mm_address];
 				buf_mm_readdatavalid <= 1;
 				mm_waitrequest <= 0;
 				req <= 0;
@@ -105,7 +105,7 @@ always @(posedge mm_clk, posedge rst) begin
 				buf_mm_readdatavalid <= 1;
 				mm_waitrequest <= 0;
 			end else begin
-				timeout_ctr <= timeout_ctr + 1;
+				timeout_ctr <= timeout_ctr + 16'h1;
 			end
 		end else if(state == DONE) begin
 			state <= IDLE;

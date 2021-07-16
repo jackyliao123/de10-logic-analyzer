@@ -72,21 +72,9 @@ assign rst = ~KEY[0];
 
 wire sample_clk;
 wire data_clk;
-
-wire [7:0] [31:0] wr_states;
-
-wire         mapped_wr_valid;
-wire [255:0] mapped_wr_data;
-
-wire         cprs_wr_valid;
-wire [255:0] cprs_wr_data;
-
-wire         mem_wr_valid;
-wire [255:0] mem_wr_data;
-
 wire sdram_clk;
 wire hps_clk;
-
+wire adc_clk;
 assign hps_clk = FPGA_CLK1_50;
 
 wire  [26:0] sdram_address;
@@ -150,8 +138,8 @@ hps u0 (
 	.h2f_lw_writedata              (h2f_lw_writedata),            //                 .writedata
 	.h2f_lw_byteenable             (h2f_lw_byteenable),           //                 .byteenable
 
-	.capture_clk_clk               (sample_clk),
-	.capture_clk_div8_clk          (data_clk)
+	.clk_capture_clk               (sample_clk),                  //          clk_adc.clk
+	.clk_adc_clk                   (adc_clk)                      //      clk_capture.clk
 );
 
 wire        reg_clk       [16];
@@ -181,20 +169,29 @@ memory_mapped_regs #(.ADDR_SIZE(4)) mm (
 
 //  0: Register CTRL (RW)
 //     31  - run
-//     26  - compression
 // [26:24] - trig mode
 //             0 - always
-//             1 - never
-//             2 - rising edge
-//             3 - falling edge
-//             4 - both edges
-//             5 - high
-//             6 - low
+//             1 - rising edge
+//             2 - falling edge
+//             3 - both edges
+//             4 - high
+//             5 - low
+//         other - never
 // [23:19] - trig channel
 // [18:16] - num channels
-//      1  - reset sdram_iface
-//      0  - reset frontend
-reg [31:0] reg_CTRL;
+//      2  - reset adc
+//      1  - reset digital frontend
+//      0  - reset sdram_iface
+struct packed {
+	reg [ 4:0] __reserved1;
+	reg [ 2:0] trig_mode;
+	reg [ 4:0] trig_channel;
+	reg [ 2:0] num_channel;
+	reg [12:0] __reserved0;
+	reg        rst_analog;
+	reg        rst_digital;
+	reg        rst_sdram;
+} reg_CTRL;
 assign reg_readdata[0] = reg_CTRL;
 assign reg_clk[0] = hps_clk;
 always @(posedge hps_clk) begin
@@ -203,20 +200,45 @@ always @(posedge hps_clk) begin
 	end
 end
 
-//  1: Register STATUS (R)
-// [24:16] - overflow counter
-//     10  - finished
-//      9  - samples wrapped in memory
-//      8  - triggered
-// [ 7: 0] - trigger subsample
-reg [31:0] reg_STATUS;
-assign reg_readdata[1] = reg_STATUS;
-assign reg_clk[0] = hps_clk;
+//  1: Register INFO_RUN (R)
+//      17  - fill_wrapped
+//      16  - triggered
+//  [15: 8] - trig_sample 
+//       2  - terminate
+//       1  - launch
+//       0  - running
+struct packed {
+	logic [13:0] __reserved1;
+	logic        fill_wrapped;
+	logic        triggered;
+	logic [ 7:0] trig_sample;
+	logic [ 4:0] __reserved0;
+	reg          terminate;
+	reg          launch;
+	logic        running;
+} reg_INFO_RUN;
+assign reg_readdata[1] = reg_INFO_RUN;
+assign reg_clk[1] = sdram_clk;
+always @(posedge sdram_clk) begin
+	reg_INFO_RUN.launch = 0;
+	if(reg_INFO_RUN.terminate && !reg_INFO_RUN.running) begin
+		reg_INFO_RUN.terminate = 0;
+	end
+	if(reg_write[1]) begin
+		if(reg_writedata[1]) begin
+			reg_INFO_RUN.launch = 1;
+		end
+		if(reg_writedata[2]) begin
+			reg_INFO_RUN.terminate = 1;
+		end
+	end
+end
 
 //  2: Register TRIG_COND_MATCH (RW)
 // [31: 0] - match
 reg [31:0] reg_TRIG_COND_MATCH;
 assign reg_readdata[2] = reg_TRIG_COND_MATCH;
+assign reg_clk[2] = data_clk;
 always @(posedge data_clk) begin
 	if(reg_write[2]) begin
 		reg_TRIG_COND_MATCH <= reg_writedata;
@@ -227,197 +249,340 @@ end
 // [31: 0] - mask
 reg [31:0] reg_TRIG_COND_MASK;
 assign reg_readdata[3] = reg_TRIG_COND_MASK;
+assign reg_clk[3] = data_clk;
 always @(posedge data_clk) begin
 	if(reg_write[3]) begin
 		reg_TRIG_COND_MASK <= reg_writedata;
 	end
 end
 
-//  4: Register NUM_SAMPLES (R)
-// [63: 0] - number of samples collected
-reg [63:0] reg_NUM_SAMPLES;
+//  4: Register SAMPLE_D_COUNT (R)
+// [63: 0] - number of digital samples collected
+reg [63:0] reg_SAMPLE_D_COUNT;
 assign reg_clk[4:5] = '{data_clk, data_clk};
-assign reg_readdata[4:5] = '{reg_NUM_SAMPLES[31:0], reg_NUM_SAMPLES[63:32]};
+assign reg_readdata[4:5] = '{reg_SAMPLE_D_COUNT[31:0], reg_SAMPLE_D_COUNT[63:32]};
 
-//  6: Register LIMIT_TRIG_SAMPLES (RW)
-// [63: 0] - maximum number of samples after trigger
-reg [63:0] reg_LIMIT_TRIG_SAMPLES;
+//  6: Register SAMPLE_D_LIMIT (RW)
+// [63: 0] - maximum number of digital samples after trigger
+reg [63:0] reg_SAMPLE_D_LIMIT;
 assign reg_clk[6:7] = '{data_clk, data_clk};
-assign reg_readdata[6:7] = '{reg_LIMIT_TRIG_SAMPLES[31:0], reg_LIMIT_TRIG_SAMPLES[63:32]};
+assign reg_readdata[6:7] = '{reg_SAMPLE_D_LIMIT[31:0], reg_SAMPLE_D_LIMIT[63:32]};
 always @(posedge data_clk) begin
 	if(reg_write[7]) begin
-		reg_LIMIT_TRIG_SAMPLES[63:32] <= reg_writedata;
+		reg_SAMPLE_D_LIMIT[63:32] <= reg_writedata;
 	end
 	if(reg_write[6]) begin
-		reg_LIMIT_TRIG_SAMPLES[31:0] <= reg_writedata;
+		reg_SAMPLE_D_LIMIT[31:0] <= reg_writedata;
 	end
 end
 
-//  8: Register NUM_ENTRIES (R)
-// [31: 0] - number of entries written
-reg [31:0] reg_NUM_ENTRIES;
-assign reg_clk[8] = data_clk;
-assign reg_readdata[8] = reg_NUM_ENTRIES;
+//  8: Register ENTRY_ADDR (R)
+//     31  - if address wrapped when writing to memory
+// [30: 0] - address of last entry header
+wire [31:0] reg_ENTRY_ADDR;
+assign reg_clk[8] = sdram_clk;
+assign reg_readdata[8] = reg_ENTRY_ADDR;
 
-// 9: Register LIMIT_TRIG_ENTRIES (RW)
+// 9: Register ENTRY_LIMIT (RW)
 // [31: 0] - maximum number of entries after trigger
-reg [31:0] reg_LIMIT_TRIG_ENTRIES;
-assign reg_clk[9] = data_clk;
-assign reg_readdata[9] = reg_LIMIT_TRIG_ENTRIES;
-always @(posedge data_clk) begin
+reg [31:0] reg_ENTRY_LIMIT;
+assign reg_clk[9] = sdram_clk;
+assign reg_readdata[9] = reg_ENTRY_LIMIT;
+always @(posedge sdram_clk) begin
 	if(reg_write[9]) begin
-		reg_LIMIT_TRIG_ENTRIES <= reg_writedata;
+		reg_ENTRY_LIMIT <= reg_writedata;
 	end
 end
 
-// 10: Register TRIG_ENTRY (R)
-// [31: 0] - the entry where trigger happened
-reg [31:0] reg_TRIG_ENTRY;
-assign reg_clk[10] = data_clk;
-assign reg_readdata[10] = reg_TRIG_ENTRY;
+// 10: Register TRIG_ADDR (R)
+//     31  - triggered
+// [30:28] - trigger sample
+// [27: 0] - the entry where trigger happened
+wire [31:0] reg_TRIG_ADDR;
+assign reg_clk[10] = sdram_clk;
+assign reg_readdata[10] = reg_TRIG_ADDR;
 
-// 11: Register CLK_CNT_SAMPLE (R)
+// 11: Register ADC_CONFIG_1 (RW)
+// [29:25] - cfg 5
+// [24:20] - cfg 4
+// [19:15] - cfg 3
+// [14:10] - cfg 2
+// [ 9: 5] - cfg 1
+// [ 4: 0] - cfg 0
+reg [31:0] reg_ADC_CONFIG_1;
+assign reg_clk[11] = adc_clk;
+assign reg_readdata[11] = reg_ADC_CONFIG_1;
+always @(posedge adc_clk) begin
+	if(reg_write[11]) begin
+		reg_ADC_CONFIG_1 <= reg_writedata;
+	end
+end
+
+// 12: Register ADC_CONFIG_2 (RW)
+// [18:16] - number of configs
+// [ 9: 5] - cfg 7
+// [ 4: 0] - cfg 6
+reg [31:0] reg_ADC_CONFIG_2;
+assign reg_clk[12] = adc_clk;
+assign reg_readdata[12] = reg_ADC_CONFIG_2;
+always @(posedge adc_clk) begin
+	if(reg_write[12]) begin
+		reg_ADC_CONFIG_2 <= reg_writedata;
+	end
+end
+
+wire [7:0] [4:0] adc_config;
+assign adc_config[0] = reg_ADC_CONFIG_1[ 4: 0];
+assign adc_config[1] = reg_ADC_CONFIG_1[ 9: 5];
+assign adc_config[2] = reg_ADC_CONFIG_1[14:10];
+assign adc_config[3] = reg_ADC_CONFIG_1[19:15];
+assign adc_config[4] = reg_ADC_CONFIG_1[24:20];
+assign adc_config[5] = reg_ADC_CONFIG_1[29:25];
+assign adc_config[6] = reg_ADC_CONFIG_2[ 4: 0];
+assign adc_config[7] = reg_ADC_CONFIG_2[ 9: 5];
+
+wire [2:0] adc_config_cnt;
+assign adc_config_cnt = reg_ADC_CONFIG_2[18:16];
+
+// 13: Register SAMPLE_A_COUNT (R)
+// [31: 0] - number of analog samples collected
+reg [31:0] reg_SAMPLE_A_COUNT;
+assign reg_clk[13] = adc_clk;
+assign reg_readdata[13] = reg_SAMPLE_A_COUNT;
+
+// 14: Register CLK_CNT_SAMPLE (R)
 // [31: 0] - clk rate in kHz
 reg [31:0] reg_CLK_CNT_SAMPLE;
-assign reg_clk[11] = FPGA_CLK1_50;
+assign reg_clk[14] = FPGA_CLK1_50;
 clock_monitor clk_mon_sample(
 	.rst(rst),
 	.clk(sample_clk),
 	.ref_clk(FPGA_CLK1_50),
-	.count(reg_readdata[11])
+	.count(reg_readdata[14])
 );
 
-// 12: Register CLK_CNT_DATA (R)
+// 15: Register CLK_CNT_ADC (R)
 // [31: 0] - clk rate in kHz
-reg [31:0] reg_CLK_CNT_DATA;
-assign reg_clk[12] = FPGA_CLK1_50;
+reg [31:0] reg_CLK_CNT_ADC;
+assign reg_clk[15] = FPGA_CLK1_50;
 clock_monitor clk_mon_data(
 	.rst(rst),
-	.clk(data_clk),
+	.clk(adc_clk),
 	.ref_clk(FPGA_CLK1_50),
-	.count(reg_readdata[12])
+	.count(reg_readdata[15])
 );
 
-wire rst_frontend;
-reset_sync reset_frontend(
-	.rst_in(rst | reg_CTRL[0] /* reset frontend */),
+wire rst_a;
+reset_sync reset_sync_a(
+	.rst_in(rst | reg_CTRL.rst_analog),
+	.clk(adc_clk),
+	.rst_out(rst_a)
+);
+
+wire rst_d_frontend;
+reset_sync reset_sync_d_frontend(
+	.rst_in(rst | reg_CTRL.rst_digital),
 	.clk(sample_clk),
-	.rst_out(rst_frontend)
+	.rst_out(rst_d_frontend)
 );
 
-wire rst_data_pipeline;
-reset_sync reset_pipeline(
-	.rst_in(rst | reg_CTRL[0] /* reset frontend */),
+wire rst_d_pipeline;
+reset_sync reset_sync_d_pipeline(
+	.rst_in(rst | reg_CTRL.rst_digital),
 	.clk(data_clk),
-	.rst_out(rst_data_pipeline)
-);
-
-wire rst_compressor;
-reset_sync reset_compressor(
-	.rst_in(rst | reg_CTRL[0] /* reset frontend */ | !reg_CTRL[26] /* compression */),
-	.clk(data_clk),
-	.rst_out(rst_compressor)
+	.rst_out(rst_d_pipeline)
 );
 
 wire rst_sdram;
 reset_sync reset_sdram(
-	.rst_in(rst | reg_CTRL[1] /* reset sdram_iface */),
+	.rst_in(rst | reg_CTRL.rst_sdram),
 	.clk(sdram_clk),
 	.rst_out(rst_sdram)
 );
 
-reg [1:0] run_buf;
-wire run;
-assign run = run_buf[1];
+wire run_a;
+cdc cdc_a(
+	.from  (reg_INFO_RUN.running),
+	.to_rst(rst_a),
+	.to_clk(adc_clk),
+	.to    (run_a)
+);
 
-always @(posedge data_clk, posedge rst_data_pipeline) begin
-	if(rst_data_pipeline) begin
-		run_buf <= 0;
-	end else begin
-		run_buf <= {run_buf[0], reg_CTRL[31] /* run */};
-	end
-end
+wire run_d;
+cdc cdc_d(
+	.from  (reg_INFO_RUN.running),
+	.to_rst(rst_d_pipeline),
+	.to_clk(data_clk),
+	.to    (run_d)
+);
 
+wire [31:0] [7:0] wr_states;
 
 capture_frontend frontend (
-	.rst(rst_frontend),
+	.rst(rst_d_frontend),
 	.clk(sample_clk),
 	.channels(GPIO_0[31:0]),
 	.clk_div8(data_clk),
 	.wr_states(wr_states)
 );
 
-//lvds_frontend frontend (
-//	//.rx_enable(data_clk),
-//	.rx_in(GPIO_0[31:0]),
-//	.rx_inclock(GPIO_1[0]),
-//	.rx_out(wr_states),
-//	.rx_outclock(data_clk)
-//);
+wire         d_wr_valid;
+wire [255:0] d_wr_data;
 
+wire       wr_triggered;
+wire [2:0] wr_trig_pos;
+wire [7:0] wr_trig_sample;
 
-//wire o_valid;
-//assign data_clk = !o_valid;
-//
-//frontend fr (
-//	.clk(sample_clk),
-//	.reset(rst),
-//	.inin(GPIO_0[1:0]),
-//	.o_valid(o_valid),
-//	.outout({wr_states[1], wr_states[0]})
-//);
+trigger trig (
+	.rst(rst_d_pipeline),
+	.clk(data_clk),
+	.wr_states(wr_states),
+	.trig_mask(reg_TRIG_MASK),
+	.trig_match(reg_TRIG_MATCH),
+	.trig_channel(reg_CTRL.trig_channel),
+	.trig_mode(reg_CTRL.trig_mode),
+	.trig_valid(wr_trig_valid),
+	.trig_pos(wr_trig_pos)
+);
 
 capture_channel_mapper channel_mapper (
-	.rst(rst_data_pipeline),
+	.rst(rst_d_pipeline),
 	.clk(data_clk),
-	.channels(reg_CTRL[18:16] /* num channels */),
+	.channels(reg_CTRL.num_channel),
 	.wr_states(wr_states),
-	.out_valid(mapped_wr_valid),
-	.out_data(mapped_wr_data)
+	.trig_pos(wr_trig_pos),
+	.trig_valid(wr_trig_valid),
+
+	.out_valid(d_wr_valid),
+	.out_data(d_wr_data),
+
+	.triggered(wr_triggered),
+	.trig_sample(wr_trig_sample)
 );
 
-capture_compressor compressor (
-	.rst(rst_compressor),
-	.clk(data_clk),
-	.in_valid(mapped_wr_valid && run),
-	.in_data(mapped_wr_data),
-	.out_valid(cprs_wr_valid),
-	.out_data(cprs_wr_data)
-);
+localparam
+		D_WAIT = 0,
+		D_INFO_RUN = 1;
 
-assign mem_wr_valid = (reg_CTRL[26] /* compression */ ? cprs_wr_valid : mapped_wr_valid) && run;
-assign mem_wr_data = reg_CTRL[26] /* compression */ ? cprs_wr_data : mapped_wr_data;
+reg  [1:0] d_state;
+reg        d_terminate;
+reg [63:0] d_count_after_trigger;
+reg        trig_latch;
 
-always @(posedge data_clk, posedge rst_data_pipeline) begin
-	if(rst_data_pipeline) begin
-		reg_NUM_SAMPLES <= 0;
-		reg_NUM_ENTRIES <= 0;
+always @(posedge data_clk, posedge rst_d_pipeline) begin
+	if(rst_d_pipeline) begin
+		reg_SAMPLE_D_COUNT <= 0;
+		d_state <= D_WAIT;
+		trig_latch <= 0;
+		d_terminate <= 0;
+		d_count_after_trigger <= 0;
 	end else begin
-		if(run) begin
-			reg_NUM_SAMPLES <= reg_NUM_SAMPLES + 1;
-			if(!write_full && mem_wr_valid) begin
-				reg_NUM_ENTRIES <= reg_NUM_ENTRIES + 1;
+		if(d_state == D_WAIT) begin
+			if(run_d) begin
+				reg_SAMPLE_D_COUNT <= 0;
+				d_state <= D_INFO_RUN;
+				d_count_after_trigger <= 0;
 			end
-		end else begin
-			reg_NUM_SAMPLES <= 0;
-			reg_NUM_ENTRIES <= 0;
+			trig_latch <= 0;
+			d_terminate <= 0;
+		end else if(d_state == D_INFO_RUN) begin
+			if(d_wr_valid) begin
+				if(trig_latch) begin
+					if(d_count_after_trigger == reg_SAMPLE_D_LIMIT) begin
+						d_terminate <= 1;
+					end else begin
+						d_count_after_trigger = d_count_after_trigger + 1;
+					end
+				end
+				reg_SAMPLE_D_COUNT <= reg_SAMPLE_D_COUNT + 1;
+				if(wr_triggered && !trig_latch) begin
+					trig_latch <= 1;
+				end
+			end
+			if(!run_d) begin
+				d_state <= D_WAIT;
+			end
+		end
+	end
+end
+
+wire d_sdram_terminate;
+cdc cdc_d_sdram_terminate(
+	.from  (d_terminate),
+	.to_rst(rst_sdram),
+	.to_clk(sdram_clk),
+	.to    (d_sdram_terminate)
+);
+
+adc adc(
+	.rst(rst_a),
+	.clk(adc_clk),
+	.cfg_count(adc_config_cnt),
+	.cfg_listing(adc_config),
+	.sample(a_wr_data),
+	.sample_valid(a_wr_valid),
+	.ADC_CONVST(ADC_CONVST),
+	.ADC_SCK(ADC_SCK),
+	.ADC_SDI(ADC_SDI),
+	.ADC_SDO(ADC_SDO)
+);
+
+localparam
+		A_WAIT = 0,
+		A_INFO_RUN = 1;
+
+reg [1:0] a_state;
+
+always @(posedge adc_clk, posedge rst_a) begin
+	if(rst_a) begin
+		reg_SAMPLE_A_COUNT <= 0;
+		a_state <= A_WAIT;
+	end else begin
+		if(a_state == A_WAIT) begin
+			if(run_a) begin
+				reg_SAMPLE_A_COUNT <= 0;
+				a_state <= A_INFO_RUN;
+			end
+		end else if(a_state == A_INFO_RUN) begin
+			if(a_wr_valid) begin
+				reg_SAMPLE_A_COUNT <= reg_SAMPLE_A_COUNT + 1;
+			end
+			if(!run_a) begin
+				a_state <= A_WAIT;
+			end
 		end
 	end
 end
 
 sdram_interface sdram_iface(
-	.rst_wr(rst_data_pipeline),
-	.wr_clk(data_clk),
-	.wr_data_en(!write_full && mem_wr_valid),
-	.wr_data(mem_wr_data),
-	.wr_full(write_full),
-	.fill_launch(run),
-	.fill_terminate(!run),
-	.fill_running(LED[5]),
+	.d_wr_rst(rst_d_pipeline),
+	.d_wr_clk(data_clk),
+	.d_wr_en(!d_wr_full && d_wr_valid && d_state == D_INFO_RUN && !d_terminate),
+	.d_wr_data(d_wr_data),
+	.d_wr_full(d_wr_full),
+	.d_wr_trig(wr_triggered && !trig_latch),
+	.d_wr_trig_sample(wr_trig_sample),
+
+	.a_wr_rst(rst_a),
+	.a_wr_clk(adc_clk),
+	.a_wr_en(!a_wr_full && a_wr_valid && run_a),
+	.a_wr_data(a_wr_data),
+	.a_wr_full(a_wr_full),
+
+	.fill_launch(reg_INFO_RUN.launch),
+	.fill_terminate(reg_INFO_RUN.terminate | d_sdram_terminate),
+	.fill_running(reg_INFO_RUN.running),
+	.fill_wrapped(reg_INFO_RUN.fill_wrapped),
+	.fill_last_addr(reg_ENTRY_ADDR),
 	.fill_addr_start(32'h20000000 >> 5),
 	.fill_addr_end(32'h3fffffff >> 5),
 
-	.rst_sdram           (rst_sdram),
+	.trig_entries(reg_ENTRY_LIMIT),
+	.trig_sample(reg_INFO_RUN.trig_sample),
+	.trig_addr(reg_TRIG_ADDR),
+	.triggered(reg_INFO_RUN.triggered),
+
+	.sdram_rst           (rst_sdram),
 	.sdram_clk           (sdram_clk),
 	.sdram_address       (sdram_address),
 	.sdram_burstcount    (sdram_burstcount),
