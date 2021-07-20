@@ -168,7 +168,6 @@ memory_mapped_regs #(.ADDR_SIZE(4)) mm (
 );
 
 //  0: Register CTRL (RW)
-//     31  - run
 // [26:24] - trig mode
 //             0 - always
 //             1 - rising edge
@@ -295,9 +294,7 @@ always @(posedge sdram_clk) begin
 end
 
 // 10: Register TRIG_ADDR (R)
-//     31  - triggered
-// [30:28] - trigger sample
-// [27: 0] - the entry where trigger happened
+// [31: 0] - the entry where trigger happened
 wire [31:0] reg_TRIG_ADDR;
 assign reg_clk[10] = sdram_clk;
 assign reg_readdata[10] = reg_TRIG_ADDR;
