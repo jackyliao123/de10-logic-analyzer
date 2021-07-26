@@ -26,7 +26,7 @@ struct __attribute__((packed)) status {
 	uint8_t running;
 };
 
-struct __attribute__((packed)) logic_analyzer {
+struct __attribute__((packed, aligned(4))) logic_analyzer {
 	uint32_t CTRL;
 	uint32_t INFO_RUN;
 	uint32_t TRIG_COND_MATCH;

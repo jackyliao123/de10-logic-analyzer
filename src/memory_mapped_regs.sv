@@ -72,10 +72,14 @@ always @(posedge mm_clk, posedge rst) begin
 			mm_waitrequest <= 1;
 			buf_mm_readdatavalid <= 0;
 			timeout_ctr <= 0;
-			if(mm_write && mm_byteenable == 4'b1111) begin
-				state <= WRITE_WAIT;
-				req <= 1;
-				reg_writedata <= mm_writedata;
+			if(mm_write) begin
+				if(mm_byteenable == 4'b1111) begin
+					state <= WRITE_WAIT;
+					req <= 1;
+					reg_writedata <= mm_writedata;
+				end else begin
+					mm_waitrequest <= 0;
+				end
 			end else if(mm_read) begin
 				state <= READ_WAIT;
 				req <= 1;

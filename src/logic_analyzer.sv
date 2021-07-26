@@ -376,12 +376,12 @@ reset_sync reset_sync_a(
 	.rst_out(rst_a)
 );
 
-wire rst_d_frontend;
+/*wire rst_d_frontend;
 reset_sync reset_sync_d_frontend(
 	.rst_in(rst | reg_CTRL.rst_digital),
 	.clk(sample_clk),
 	.rst_out(rst_d_frontend)
-);
+);*/
 
 wire rst_d_pipeline;
 reset_sync reset_sync_d_pipeline(
@@ -416,7 +416,7 @@ cdc cdc_d(
 wire [31:0] [7:0] wr_states;
 
 capture_frontend frontend (
-	.rst(rst_d_frontend),
+	.rst(/*rst_d_frontend*/ 0), // No reset for timing requirement
 	.clk(sample_clk),
 	.channels(GPIO_0[31:0]),
 	.clk_div8(data_clk),

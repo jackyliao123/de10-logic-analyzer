@@ -90,6 +90,6 @@ double pll_set_freq(volatile struct pll_reconfig *pll, double freq) {
 	pll_compute_vals(freq, &vals);
 	double actual_freq = pll_compute_freq(&vals);
 	pll_apply_config(pll, &vals);
-	printf("pll_set_freq %p, requested = %ld, actual = %ld\n", pll, freq, actual_freq);
+	printf("pll_set_freq %p, requested = %lf, actual = %lf\n", pll, freq, actual_freq);
 	return actual_freq;
 }

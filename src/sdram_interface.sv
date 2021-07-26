@@ -84,7 +84,8 @@ sdram_a_fifo a_fifo(
 localparam
 		WAIT = 0,
 		XFER = 1,
-		FINI = 2;
+		FINI1 = 2,
+		FINI2 = 3;
 
 reg   [1:0] state;
 reg         prev_d_valid;
@@ -93,6 +94,7 @@ reg  [31:0] prev_repeat_cnt;
 reg  [31:0] prev_hdr_addr;
 reg         prev_compressed;
 reg  [31:0] entries_remain;
+reg  [31:0] next_addr;
 
 assign sdram_burstcount = 1;
 assign fill_running = state != WAIT;
@@ -143,6 +145,7 @@ always @(posedge sdram_clk, posedge sdram_rst) begin
 		entries_remain  <= 0;
 		fill_wrapped    <= 0;
 
+		next_addr       <= 0;
 		sdram_address   <= 0;
 		sdram_write     <= 0;
 		sdram_writedata <= 0;
@@ -163,16 +166,19 @@ always @(posedge sdram_clk, posedge sdram_rst) begin
 				entries_remain  <= 0;
 				fill_wrapped    <= 0;
 
-				sdram_address   <= fill_addr_start;
+				next_addr       <= fill_addr_start;
+				sdram_address   <= 0;
 				sdram_write     <= 0;
 				sdram_writedata <= 0;
 			end
 		end else if(state == XFER) begin
 			if(!sdram_waitrequest || !sdram_write) begin
 				if(!a_rd_empty) begin
+					// Analog data, always terminate previous run
 					sdram_write = 1;
 					sdram_writedata <= {prev_hdr_addr, 32'h1, 32'h0, prev_repeat_cnt, 112'h0, a_rd_data};
-					prev_hdr_addr <= sdram_address;
+					sdram_address <= next_addr;
+					prev_hdr_addr <= next_addr;
 					if(prev_compressed) begin
 						prev_compressed <= 0;
 						prev_repeat_cnt <= 0;
@@ -184,6 +190,7 @@ always @(posedge sdram_clk, posedge sdram_rst) begin
 						if(!prev_compressed) begin
 							// Previous run does not exist
 							sdram_writedata <= d_rd_data;
+							sdram_address <= next_addr;
 							prev_d_data <= d_rd_data;
 							prev_d_valid <= 1;
 							if(d_rd_triggered) begin
@@ -196,7 +203,8 @@ always @(posedge sdram_clk, posedge sdram_rst) begin
 						end else begin
 							// Previous run exists, terminate
 							sdram_writedata <= {prev_hdr_addr, 32'h0, 32'h0, prev_repeat_cnt, 128'h0};
-							prev_hdr_addr <= sdram_address;
+							sdram_address <= next_addr;
+							prev_hdr_addr <= next_addr;
 							prev_compressed <= 0;
 							prev_repeat_cnt <= 0;
 							prev_d_valid <= 0;
@@ -211,36 +219,40 @@ always @(posedge sdram_clk, posedge sdram_rst) begin
 					sdram_write = 0;
 					// Manual termination
 					if(fill_terminate) begin
-						state <= FINI;
+						state <= FINI1;
 					end
 				end
 
 				if(sdram_write) begin
 					// Terminate after configured entries after trigger
 					if(triggered) begin
-						if((entries_remain & 32'hFFFFFFFE) == 0) begin
-							state <= FINI;
+						if((entries_remain & 32'hFFFFFFFC) == 0) begin
+							state <= FINI1;
 						end else begin
 							entries_remain <= entries_remain - 1;
 						end
 					end
 
 					// Address control
-					if(sdram_address == fill_addr_end) begin
-						sdram_address <= fill_addr_start;
+					if(next_addr == fill_addr_end) begin
+						next_addr <= fill_addr_start;
 						fill_wrapped <= 1;
 					end else begin
-						sdram_address <= sdram_address + 1;
+						next_addr <= next_addr + 1;
 					end
 				end
 			end
-		end else if(state == FINI) begin
-			sdram_write <= 1;
-			sdram_writedata <= {prev_hdr_addr, 32'h0, 32'h0, prev_repeat_cnt, 128'h0};
-			if(!sdram_waitrequest) begin
-				sdram_write <= 0;
-				state <= WAIT;
+		end else if(state == FINI1) begin
+			if(!sdram_write || !sdram_waitrequest) begin
+				sdram_write = 1;
+				sdram_writedata <= {prev_hdr_addr, 32'h0, 32'h0, prev_repeat_cnt, 128'h0};
+				sdram_address <= next_addr;
+				prev_hdr_addr <= next_addr;
+				state <= FINI2;
 			end
+		end else if(state == FINI2) begin
+			sdram_write = 0;
+			state <= WAIT;
 		end
 	end
 end
